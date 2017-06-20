@@ -7,10 +7,13 @@ import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.PointComparator;
 import com.formento.neighborhood.model.PointComparatorX;
 import com.google.common.collect.ImmutableList;
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class NodeFactoryDefault implements NodeFactory {
 
     @Override
