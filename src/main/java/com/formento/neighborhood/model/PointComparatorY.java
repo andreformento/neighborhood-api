@@ -1,4 +1,4 @@
-package com.formento.kdtree.model;
+package com.formento.neighborhood.model;
 
 public class PointComparatorY implements PointComparator {
 

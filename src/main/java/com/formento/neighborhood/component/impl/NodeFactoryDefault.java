@@ -1,11 +1,11 @@
-package com.formento.kdtree.component.impl;
+package com.formento.neighborhood.component.impl;
 
-import com.formento.kdtree.component.NodeFactory;
-import com.formento.kdtree.infra.KdtreeDuplicationPointException;
-import com.formento.kdtree.model.Node;
-import com.formento.kdtree.model.Point;
-import com.formento.kdtree.model.PointComparator;
-import com.formento.kdtree.model.PointComparatorX;
+import com.formento.neighborhood.component.NodeFactory;
+import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
+import com.formento.neighborhood.model.Node;
+import com.formento.neighborhood.model.Point;
+import com.formento.neighborhood.model.PointComparator;
+import com.formento.neighborhood.model.PointComparatorX;
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.List;

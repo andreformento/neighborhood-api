@@ -1,7 +1,7 @@
-package com.formento.kdtree.service;
+package com.formento.neighborhood.service;
 
-import com.formento.kdtree.model.Point;
-import com.formento.kdtree.model.Rectangle;
+import com.formento.neighborhood.model.Point;
+import com.formento.neighborhood.model.Rectangle;
 import java.util.Collection;
 
 public interface RectangleService {

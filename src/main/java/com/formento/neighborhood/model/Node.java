@@ -1,9 +1,8 @@
-package com.formento.kdtree.model;
+package com.formento.neighborhood.model;
 
-import com.formento.kdtree.infra.KdtreeDuplicationPointException;
+import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Node {

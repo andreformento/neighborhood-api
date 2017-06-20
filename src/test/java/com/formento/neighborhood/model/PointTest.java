@@ -1,4 +1,4 @@
-package com.formento.kdtree.model;
+package com.formento.neighborhood.model;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;

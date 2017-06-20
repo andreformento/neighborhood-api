@@ -1,13 +1,13 @@
-package com.formento.kdtree.service;
+package com.formento.neighborhood.service;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import com.formento.kdtree.model.Point;
-import com.formento.kdtree.model.Rectangle;
-import com.formento.kdtree.service.impl.RectangleServiceDefault;
+import com.formento.neighborhood.model.Point;
+import com.formento.neighborhood.model.Rectangle;
+import com.formento.neighborhood.service.impl.RectangleServiceDefault;
 import com.google.common.collect.ImmutableList;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;

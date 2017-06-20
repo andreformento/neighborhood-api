@@ -1,4 +1,4 @@
-package com.formento.kdtree;
+package com.formento.neighborhood;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

@@ -1,11 +1,11 @@
-package com.formento.kdtree.model;
+package com.formento.neighborhood.model;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-import com.formento.kdtree.component.NodeFactory;
-import com.formento.kdtree.component.impl.NodeFactoryDefault;
+import com.formento.neighborhood.component.NodeFactory;
+import com.formento.neighborhood.component.impl.NodeFactoryDefault;
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.List;

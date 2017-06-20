@@ -1,10 +1,9 @@
-package com.formento.kdtree.service.impl;
+package com.formento.neighborhood.service.impl;
 
-import com.formento.kdtree.model.Node;
-import com.formento.kdtree.model.Point;
-import com.formento.kdtree.model.PointComparatorX;
-import com.formento.kdtree.model.Rectangle;
-import com.formento.kdtree.service.PointService;
+import com.formento.neighborhood.model.Node;
+import com.formento.neighborhood.model.Point;
+import com.formento.neighborhood.model.Rectangle;
+import com.formento.neighborhood.service.PointService;
 import java.util.Collection;
 
 public class PointServiceDefault implements PointService {

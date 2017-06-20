@@ -1,4 +1,4 @@
-package com.formento.kdtree.model;
+package com.formento.neighborhood.model;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

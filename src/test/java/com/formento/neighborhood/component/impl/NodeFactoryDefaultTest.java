@@ -1,12 +1,12 @@
-package com.formento.kdtree.component.impl;
+package com.formento.neighborhood.component.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.formento.kdtree.component.NodeFactory;
-import com.formento.kdtree.model.Node;
-import com.formento.kdtree.model.Point;
-import com.formento.kdtree.model.PointComparatorX;
-import com.formento.kdtree.model.PointComparatorY;
+import com.formento.neighborhood.component.NodeFactory;
+import com.formento.neighborhood.model.Node;
+import com.formento.neighborhood.model.Point;
+import com.formento.neighborhood.model.PointComparatorX;
+import com.formento.neighborhood.model.PointComparatorY;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.Optional;
