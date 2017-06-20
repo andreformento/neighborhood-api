@@ -1,7 +1,8 @@
 package com.formento.neighborhood.model;
 
-import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
+import com.formento.neighborhood.validation.DuplicatedNodeValidator;
 import com.google.common.collect.ImmutableList;
+
 import java.util.Collection;
 import java.util.Optional;
 
@@ -36,6 +37,8 @@ public class Node {
     }
 
     public Node add(final Point point) {
+        new DuplicatedNodeValidator(value).validate(point);
+
         final Boolean isLeftWay = pointComparator.compare(point, value) < 0;
         final Optional<Node> nextNode = isLeftWay ? left : right;
 
@@ -47,10 +50,6 @@ public class Node {
     }
 
     private Node generatePoint(final Point point, final Boolean isLeftWay) {
-        if (value.equals(point)) {
-            throw new KdtreeDuplicationPointException("It is not possible insert duplicate points: " + point.toString());
-        }
-
         final Node node = new Node(point, left, right, pointComparator.getNextPointComparator());
 
         if (isLeftWay) {

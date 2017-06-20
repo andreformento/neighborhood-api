@@ -1,20 +1,27 @@
 package com.formento.neighborhood.model;
 
+import com.formento.neighborhood.component.NodeFactory;
+import com.formento.neighborhood.component.impl.NodeFactoryDefault;
+import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
+import com.google.common.collect.ImmutableList;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.component.impl.NodeFactoryDefault;
-import com.google.common.collect.ImmutableList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
-
 public class NodeTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     private NodeFactory nodeFactory = new NodeFactoryDefault();
     private Node root;
@@ -27,13 +34,13 @@ public class NodeTest {
     @Before
     public void init() {
         final List<Point> points = ImmutableList.<Point>builder().
-            add(new Point(3, 6)).
-            add(new Point(17, 15)).
-            add(new Point(13, 15)).
-            add(new Point(9, 1)).
-            add(new Point(2, 7)).
-            add(new Point(10, 19)).
-            build();
+                add(new Point(3, 6)).
+                add(new Point(17, 15)).
+                add(new Point(13, 15)).
+                add(new Point(9, 1)).
+                add(new Point(2, 7)).
+                add(new Point(10, 19)).
+                build();
 
         // when
         root = nodeFactory.createRoot(points);
@@ -55,11 +62,11 @@ public class NodeTest {
 
         // then
         Assertions.
-            assertThat(root.getRight()).
-            map(Node::getRight).
-            map(Optional::get).
-            map(Node::getValue).
-            hasValue(point_11_16);
+                assertThat(root.getRight()).
+                map(Node::getRight).
+                map(Optional::get).
+                map(Node::getValue).
+                hasValue(point_11_16);
     }
 
     @Test
@@ -94,6 +101,19 @@ public class NodeTest {
 
         // then
         assertThat(points, containsInAnyOrder(equalTo(point_10_19), equalTo(point_12_14), equalTo(point_13_15), equalTo(point_17_15)));
+    }
+
+    @Test
+    public void shouldFailOnAddDuplicatePoint() {
+        // given
+        final Point point_3_6 = new Point(3, 6);
+
+        // expected
+        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expectMessage("It is not possible insert duplicate points: " + point_3_6.toString());
+
+        // when
+        root.add(point_3_6);
     }
 
 }

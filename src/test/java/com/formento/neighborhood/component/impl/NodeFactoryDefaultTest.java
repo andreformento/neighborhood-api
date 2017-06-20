@@ -1,19 +1,27 @@
 package com.formento.neighborhood.component.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.formento.neighborhood.component.NodeFactory;
+import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.PointComparatorX;
 import com.formento.neighborhood.model.PointComparatorY;
 import com.google.common.collect.ImmutableList;
+import org.assertj.core.api.OptionalAssert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import java.util.List;
 import java.util.Optional;
-import org.assertj.core.api.OptionalAssert;
-import org.junit.Test;
+
+import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NodeFactoryDefaultTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     private NodeFactory nodeFactory = new NodeFactoryDefault();
 
@@ -44,15 +52,15 @@ public class NodeFactoryDefaultTest {
         final Point point_10_19 = new Point(10, 19);
 
         final List<Point> points = ImmutableList.<Point>builder().
-            add(point_3_6).
-            add(point_17_15).
-            add(point_13_15).
-            add(point_6_12).
-            add(point_9_1).
-            add(point_2_7).
-            add(point_10_19).
+                add(point_3_6).
+                add(point_17_15).
+                add(point_13_15).
+                add(point_6_12).
+                add(point_9_1).
+                add(point_2_7).
+                add(point_10_19).
 
-            build();
+                build();
 
         // when
         final Node root = nodeFactory.createRoot(points);
@@ -104,14 +112,14 @@ public class NodeFactoryDefaultTest {
         final Point point_10_19 = new Point(10, 19);
 
         final List<Point> points = ImmutableList.<Point>builder().
-            add(point_3_6).
-            add(point_17_15).
-            add(point_13_15).
-            add(point_9_1).
-            add(point_2_7).
-            add(point_10_19).
+                add(point_3_6).
+                add(point_17_15).
+                add(point_13_15).
+                add(point_9_1).
+                add(point_2_7).
+                add(point_10_19).
 
-            build();
+                build();
 
         // when
         final Node root = nodeFactory.createRoot(points);
@@ -133,6 +141,38 @@ public class NodeFactoryDefaultTest {
         rightLevel1.map(Node::getPointComparator).containsInstanceOf(PointComparatorY.class);
         rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getValue).hasValue(point_13_15);
         rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+    }
+
+    @Test
+    public void shouldNotGenerateWithEmptyList() {
+        // given
+        final List<Point> points = emptyList();
+
+        // expected
+        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expectMessage("List of points cannot be empty");
+
+        // when
+        nodeFactory.createRoot(points);
+    }
+
+    @Test
+    public void shouldNotGenerateWithDuplication() {
+        // given
+        final Point pointA = new Point(3, 6);
+        final Point pointB = new Point(3, 6);
+
+        final List<Point> points = ImmutableList.<Point>builder().
+                add(pointA).
+                add(pointB).
+                build();
+
+        // expected
+        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expectMessage("It is not possible insert duplicate points: Point(x=3, y=6)");
+
+        // when
+        nodeFactory.createRoot(points);
     }
 
 }

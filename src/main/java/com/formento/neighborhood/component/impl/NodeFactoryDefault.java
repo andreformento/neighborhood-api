@@ -6,6 +6,7 @@ import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.PointComparator;
 import com.formento.neighborhood.model.PointComparatorX;
+import com.formento.neighborhood.validation.DuplicatedNodeValidator;
 import com.google.common.collect.ImmutableList;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,10 @@ public class NodeFactoryDefault implements NodeFactory {
         final Optional<Node> right = getRightNode(sortedPoints, nextPointComparator, middle);
 
         final Point value = sortedPoints.get(middle);
+
+        final DuplicatedNodeValidator duplicatedNodeValidator = new DuplicatedNodeValidator(value);
+        left.map(Node::getValue).ifPresent(duplicatedNodeValidator::validate);
+        right.map(Node::getValue).ifPresent(duplicatedNodeValidator::validate);
 
         return new Node(value, left, right, pointComparator);
     }
