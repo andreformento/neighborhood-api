@@ -26,6 +26,7 @@ public class RectangleServiceDefault implements RectangleService {
         return rectangleRepository.
                 getAll().
                 stream().
+                sorted().
                 filter(rectangle -> rectangle.containsPoint(point)).
                 collect(toList());
     }

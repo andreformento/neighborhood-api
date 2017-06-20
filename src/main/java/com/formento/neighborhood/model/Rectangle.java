@@ -2,7 +2,7 @@ package com.formento.neighborhood.model;
 
 import java.util.Objects;
 
-public class Rectangle {
+public class Rectangle implements Comparable<Rectangle> {
 
     private final Point leftBottom;
     private final Point rightTop;
@@ -53,4 +53,14 @@ public class Rectangle {
             ", rightTop=" + getRightTop() +
             ')';
     }
+
+    @Override
+    public int compareTo(Rectangle o) {
+        final int compare = leftBottom.compareTo(o.leftBottom);
+        if (compare == 0) {
+            return rightTop.compareTo(o.rightTop);
+        }
+        return compare;
+    }
+
 }
