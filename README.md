@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/andreformento/kdtree.svg?branch=master)](https://travis-ci.org/andreformento/kdtree)
-[![Code Coverage](https://codecov.io/gh/andreformento/kdtree/branch/master/graph/badge.svg)](https://codecov.io/gh/andreformento/kdtree)
+[![Build Status](https://travis-ci.org/andreformento/neighborhood-api.svg?branch=master)](https://travis-ci.org/andreformento/neighborhood-api)
+[![Code Coverage](https://codecov.io/gh/andreformento/neighborhood-api/branch/master/graph/badge.svg)](https://codecov.io/gh/andreformento/neighborhood-api)
 
 # neighborhood-api
 An API to organize neighborhood
