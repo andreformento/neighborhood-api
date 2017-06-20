@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/andreformento/kdtree.svg?branch=master)](https://travis-ci.org/andreformento/kdtree)
 [![Code Coverage](https://codecov.io/gh/andreformento/kdtree/branch/master/graph/badge.svg)](https://codecov.io/gh/andreformento/kdtree)
 
-# K-dimensional tree
-Algorithm to organizing points in a k-dimensional space
+# neighborhood-api
+An API to organize neighborhood
 
 #### How to
 Test: `$ gradle test -i`
@@ -10,7 +10,7 @@ Test: `$ gradle test -i`
 Build: `$ gradle build`
 
 
-#### References
+#### References to resolve problem
 
 - [3. Kd Trees](https://www.youtube.com/watch?v=W94M9D_yXKk)
 - [4. Interval Search Trees](https://www.youtube.com/watch?v=E-9b8k7JK6I)
