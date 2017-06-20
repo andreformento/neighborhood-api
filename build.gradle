@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
+
+jar {
+    baseName = 'neighborhood-api'
+    version = '3.0.0-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+project.ext {
+    cucumberVersion = '1.2.5'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+dependencies {
+    compile('com.google.guava:guava:21.0')
+
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    testCompile('nl.jqno.equalsverifier:equalsverifier:2.3')
+    testCompile("info.cukes:cucumber-java8:" + cucumberVersion)
+    testCompile("info.cukes:cucumber-junit:" + cucumberVersion)
+    testCompile("org.assertj:assertj-core:3.8.0")
+}
+
+check.dependsOn jacocoTestReport
