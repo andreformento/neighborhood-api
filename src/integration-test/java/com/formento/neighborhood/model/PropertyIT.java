@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableList;
 import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,11 @@ public class PropertyIT {
     @Test
     public void shoudSerialize() throws JsonProcessingException {
         // given
+        final Iterable<Province> provinces = ImmutableList.<Province>builder().
+            add(new Province("Scavy", null)).
+            add(new Province("Gode", null)).
+            build();
+
         final Property property = new Property(
             789L,
             "Imóvel código 1, com 5 quartos e 4 banheiros",
@@ -30,8 +36,8 @@ public class PropertyIT {
             new Point(222, 444),
             (short) 4,
             (short) 3,
-            210
-        );
+            210,
+            provinces);
         final String json = "{\n"
             + "  \"id\": 789,\n"
             + "  \"x\": 222,\n"
@@ -41,7 +47,8 @@ public class PropertyIT {
             + "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n"
             + "  \"beds\": 4,\n"
             + "  \"baths\": 3,\n"
-            + "  \"squareMeters\": 210\n"
+            + "  \"squareMeters\": 210,\n"
+            + "  \"provinces\" : [\"Scavy\", \"Gode\"]"
             + "}";
 
         // when
@@ -62,8 +69,7 @@ public class PropertyIT {
             new Point(222, 444),
             (short) 4,
             (short) 3,
-            210
-        );
+            210);
         final String json = "{\n"
             + "  \"id\": 789,\n"
             + "  \"x\": 222,\n"

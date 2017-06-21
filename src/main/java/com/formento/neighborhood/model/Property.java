@@ -1,8 +1,11 @@
 package com.formento.neighborhood.model;
 
+import static java.util.Collections.emptyList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 
 public class Property implements Serializable {
@@ -15,6 +18,21 @@ public class Property implements Serializable {
     private final Short beds;
     private final Short baths;
     private final Integer squareMeters;
+    private final Iterable<Province> provinces;
+
+
+    public Property(Long id, String title, Integer price, String description, Point point, Short beds, Short baths, Integer squareMeters,
+        Iterable<Province> provinces) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.point = point;
+        this.beds = beds;
+        this.baths = baths;
+        this.squareMeters = squareMeters;
+        this.provinces = provinces;
+    }
 
     @JsonCreator
     public Property(
@@ -26,15 +44,7 @@ public class Property implements Serializable {
         @JsonProperty(value = "beds") Short beds,
         @JsonProperty(value = "baths") Short baths,
         @JsonProperty(value = "squareMeters") Integer squareMeters) {
-
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.description = description;
-        this.point = point;
-        this.beds = beds;
-        this.baths = baths;
-        this.squareMeters = squareMeters;
+        this(id, title, price, description, point, beds, baths, squareMeters, emptyList());
     }
 
     public Long getId() {
@@ -68,6 +78,11 @@ public class Property implements Serializable {
 
     public Integer getSquareMeters() {
         return squareMeters;
+    }
+
+    @JsonSerialize(using = ProvincesSerializer.class)
+    public Iterable<Province> getProvinces() {
+        return provinces;
     }
 
 }
