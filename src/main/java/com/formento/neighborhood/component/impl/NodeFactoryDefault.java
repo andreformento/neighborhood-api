@@ -1,7 +1,7 @@
 package com.formento.neighborhood.component.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
+import com.formento.neighborhood.validation.KdtreeDuplicationPointException;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.PointComparator;

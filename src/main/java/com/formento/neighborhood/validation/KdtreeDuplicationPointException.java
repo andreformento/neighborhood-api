@@ -1,4 +1,4 @@
-package com.formento.neighborhood.infra;
+package com.formento.neighborhood.validation;
 
 public class KdtreeDuplicationPointException extends RuntimeException {
 

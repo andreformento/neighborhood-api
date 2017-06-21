@@ -2,7 +2,7 @@ package com.formento.neighborhood.model;
 
 import com.formento.neighborhood.component.NodeFactory;
 import com.formento.neighborhood.component.impl.NodeFactoryDefault;
-import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
+import com.formento.neighborhood.validation.KdtreeDuplicationPointException;
 import com.google.common.collect.ImmutableList;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

@@ -1,6 +1,5 @@
 package com.formento.neighborhood.validation;
 
-import com.formento.neighborhood.infra.KdtreeDuplicationPointException;
 import com.formento.neighborhood.model.Point;
 
 public class DuplicatedNodeValidator {
