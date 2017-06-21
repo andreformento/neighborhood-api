@@ -110,7 +110,7 @@ public class NodeTest {
 
         // expected
         expectedException.expect(KdtreeDuplicationPointException.class);
-        expectedException.expectMessage("It is not possible insert duplicate points: " + point_3_6.toString());
+        expectedException.expectMessage("It is not possible insert duplicated points: " + point_3_6.toString());
 
         // when
         root.add(point_3_6);

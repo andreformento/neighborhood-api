@@ -169,7 +169,7 @@ public class NodeFactoryDefaultTest {
 
         // expected
         expectedException.expect(KdtreeDuplicationPointException.class);
-        expectedException.expectMessage("It is not possible insert duplicate points: Point(x=3, y=6)");
+        expectedException.expectMessage("It is not possible insert duplicated points: Point(x=3, y=6)");
 
         // when
         nodeFactory.createRoot(points);
