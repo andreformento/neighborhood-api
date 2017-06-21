@@ -3,8 +3,9 @@ package com.formento.neighborhood.repository.impl;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.repository.PointRepository;
 import com.google.common.collect.ImmutableList;
-import java.util.Collection;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
 
 @Repository
 public class PointRepositoryDefault implements PointRepository {

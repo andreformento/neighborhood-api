@@ -13,9 +13,4 @@ public class NeighborhoodApplicationTests {
     public void contextLoads() {
     }
 
-    @Test
-    public void shouldCallMain() {
-        NeighborhoodApplication.main(new String[]{});
-    }
-
 }

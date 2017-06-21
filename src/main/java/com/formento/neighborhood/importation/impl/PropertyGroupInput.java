@@ -7,13 +7,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-class PropertyGroupFile implements Serializable {
+class PropertyGroupInput implements Serializable {
 
     private final Integer totalProperties;
-    private final Collection<PropertyFile> properties;
+    private final Collection<PropertyInput> properties;
 
     @ConstructorProperties({"totalProperties", "properties"})
-    PropertyGroupFile(Integer totalProperties, Collection<PropertyFile> properties) {
+    PropertyGroupInput(Integer totalProperties, Collection<PropertyInput> properties) {
         this.totalProperties = totalProperties;
         this.properties = properties;
     }
@@ -21,7 +21,7 @@ class PropertyGroupFile implements Serializable {
     Collection<Property> generateProperties(){
         return properties.
                 stream().
-                map(PropertyFile::generateProperty).
+                map(PropertyInput::generateProperty).
                 collect(Collectors.toList());
     }
 

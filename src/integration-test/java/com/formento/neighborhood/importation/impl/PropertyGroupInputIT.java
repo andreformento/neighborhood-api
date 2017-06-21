@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PropertyGroupFileIT {
+public class PropertyGroupInputIT {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -22,11 +22,11 @@ public class PropertyGroupFileIT {
     @Test
     public void shoudDeserialize() throws IOException {
         // given
-        final PropertyGroupFile propertyGroupFile = new PropertyGroupFile(
+        final PropertyGroupInput propertyGroupInput = new PropertyGroupInput(
                 2,
-                ImmutableList.<PropertyFile>builder().
-                        add(new PropertyFile(1L, "Cod 1", 643000, "Laboris", 1257, 928, (short) 3, (short) 2, 61)).
-                        add(new PropertyFile(2L, "Cod 2", 949000, "Anim", 679, 680, (short) 4, (short) 3, 94)).
+                ImmutableList.<PropertyInput>builder().
+                        add(new PropertyInput(1L, "Cod 1", 643000, "Laboris", 1257, 928, (short) 3, (short) 2, 61)).
+                        add(new PropertyInput(2L, "Cod 2", 949000, "Anim", 679, 680, (short) 4, (short) 3, 94)).
                         build()
         );
         final String json = "{\n" +
@@ -57,7 +57,7 @@ public class PropertyGroupFileIT {
                 "}";
 
         // when
-        final PropertyGroupFile result = objectMapper.readValue(json, PropertyGroupFile.class);
+        final PropertyGroupInput result = objectMapper.readValue(json, PropertyGroupInput.class);
 
         // then
         assertThat(result).isNotNull();
