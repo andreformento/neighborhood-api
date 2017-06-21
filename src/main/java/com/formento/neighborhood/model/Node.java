@@ -61,35 +61,35 @@ public class Node {
         return node;
     }
 
-    public Collection<Point> findPointsInsideRectangle(final Rectangle rectangle) {
+    public Collection<Point> findPointsInsideBoundary(final Boundary boundary) {
         final ImmutableList.Builder<Point> builder = ImmutableList.builder();
 
-        findPointsInsideRectangle(rectangle, builder, true);
+        findPointsInsideBoundary(boundary, builder, true);
 
         return builder.build();
     }
 
-    private void findPointsInsideRectangle(final Rectangle rectangle, final ImmutableList.Builder<Point> builder, final boolean continueIfNotFound) {
+    private void findPointsInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Point> builder, final boolean continueIfNotFound) {
         final boolean goToTheUpperLeft;
         final boolean goToTheRightBottom;
         final boolean nextContinueIfNotFound;
-        if (rectangle.containsPoint(value)) {
+        if (boundary.containsPoint(value)) {
             builder.add(value);
             goToTheUpperLeft = true;
             goToTheRightBottom = true;
             nextContinueIfNotFound = false;
         } else {
             nextContinueIfNotFound = continueIfNotFound;
-            goToTheUpperLeft = nextContinueIfNotFound && pointComparator.compare(rectangle.getUpperLeft(), value) < 0;
-            goToTheRightBottom = nextContinueIfNotFound && pointComparator.compare(rectangle.getRightBottom(), value) > 0;
+            goToTheUpperLeft = nextContinueIfNotFound && pointComparator.compare(boundary.getUpperLeft(), value) < 0;
+            goToTheRightBottom = nextContinueIfNotFound && pointComparator.compare(boundary.getRightBottom(), value) > 0;
         }
 
         left.
             filter(node -> goToTheUpperLeft).
-            ifPresent(node -> node.findPointsInsideRectangle(rectangle, builder, nextContinueIfNotFound));
+            ifPresent(node -> node.findPointsInsideBoundary(boundary, builder, nextContinueIfNotFound));
         right.
             filter(node -> goToTheRightBottom).
-            ifPresent(node -> node.findPointsInsideRectangle(rectangle, builder, nextContinueIfNotFound));
+            ifPresent(node -> node.findPointsInsideBoundary(boundary, builder, nextContinueIfNotFound));
     }
 
 }

@@ -4,10 +4,8 @@ import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.Boundary;
 import java.util.Collection;
 
-public interface PointService {
+public interface BoundaryService {
 
-    void addPoint(final Point point);
-
-    Collection<Point> findPointsInsideBoundary(final Boundary boundary);
+    Collection<Boundary> findByPoint(final Point point);
 
 }

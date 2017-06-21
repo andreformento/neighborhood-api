@@ -70,34 +70,34 @@ public class NodeTest {
     }
 
     @Test
-    public void shouldFindPointsInsideRectangle() {
+    public void shouldFindPointsInsideBoundary() {
         // given
         final Point point_17_15 = new Point(17, 15);
         final Point point_13_15 = new Point(13, 15);
         final Point point_10_19 = new Point(10, 19);
 
-        final Rectangle rectangle = new Rectangle(10, 19, 17, 14);
+        final Boundary boundary = new Boundary(10, 19, 17, 14);
 
         // when
-        final Collection<Point> points = root.findPointsInsideRectangle(rectangle);
+        final Collection<Point> points = root.findPointsInsideBoundary(boundary);
 
         // then
         assertThat(points, containsInAnyOrder(equalTo(point_10_19), equalTo(point_13_15), equalTo(point_17_15)));
     }
 
     @Test
-    public void shouldFindPointsInsideRectangleAfterInsertNew() {
+    public void shouldFindPointsInsideBoundaryAfterInsertNew() {
         // given
         final Point point_17_15 = new Point(17, 15);
         final Point point_13_15 = new Point(13, 15);
         final Point point_10_19 = new Point(10, 19);
         final Point point_12_14 = new Point(12, 14);
 
-        final Rectangle rectangle = new Rectangle(10, 19, 17, 14);
+        final Boundary boundary = new Boundary(10, 19, 17, 14);
 
         // when
         root.add(point_12_14);
-        final Collection<Point> points = root.findPointsInsideRectangle(rectangle);
+        final Collection<Point> points = root.findPointsInsideBoundary(boundary);
 
         // then
         assertThat(points, containsInAnyOrder(equalTo(point_10_19), equalTo(point_12_14), equalTo(point_13_15), equalTo(point_17_15)));

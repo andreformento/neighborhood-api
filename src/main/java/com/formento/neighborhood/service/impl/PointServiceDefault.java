@@ -3,7 +3,7 @@ package com.formento.neighborhood.service.impl;
 import com.formento.neighborhood.component.NodeFactory;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
-import com.formento.neighborhood.model.Rectangle;
+import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.repository.PointRepository;
 import com.formento.neighborhood.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class PointServiceDefault implements PointService {
     }
 
     @Override
-    public Collection<Point> findPointsInsideRectangle(Rectangle rectangle) {
-        return root.findPointsInsideRectangle(rectangle);
+    public Collection<Point> findPointsInsideBoundary(Boundary boundary) {
+        return root.findPointsInsideBoundary(boundary);
     }
 
 }

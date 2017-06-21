@@ -1,9 +1,9 @@
 package com.formento.neighborhood.service.impl;
 
+import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Point;
-import com.formento.neighborhood.model.Rectangle;
-import com.formento.neighborhood.repository.RectangleRepository;
-import com.formento.neighborhood.service.RectangleService;
+import com.formento.neighborhood.repository.BoundaryRepository;
+import com.formento.neighborhood.service.BoundaryService;
 import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
@@ -15,65 +15,65 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-class RectangleServiceDefaultBDD {
+class BoundaryServiceDefaultBDD {
 
-    private final RectangleService rectangleService;
-    private final RectangleRepository rectangleRepository;
+    private final BoundaryService boundaryService;
+    private final BoundaryRepository boundaryRepository;
 
     private Point point;
-    private Collection<Rectangle> rectanglesByPoint;
+    private Collection<Boundary> boundariesByPoint;
 
-    public RectangleServiceDefaultBDD(RectangleService rectangleService, RectangleRepository rectangleRepository) {
-        this.rectangleService = rectangleService;
-        this.rectangleRepository = rectangleRepository;
+    public BoundaryServiceDefaultBDD(BoundaryService boundaryService, BoundaryRepository boundaryRepository) {
+        this.boundaryService = boundaryService;
+        this.boundaryRepository = boundaryRepository;
     }
 
-    public RectangleServiceDefaultBDD givenAValidRegion(final List<Rectangle> rectangles) {
-        when(rectangleRepository.getAll()).thenReturn(rectangles);
+    public BoundaryServiceDefaultBDD givenAValidRegion(final List<Boundary> boundaries) {
+        when(boundaryRepository.getAll()).thenReturn(boundaries);
         return this;
     }
 
-    public RectangleServiceDefaultBDD givenSimpleRegion() {
-        return givenAValidRegion(ImmutableList.<Rectangle>builder().
-                add(new Rectangle(0, 6, 5, 1)).
+    public BoundaryServiceDefaultBDD givenSimpleRegion() {
+        return givenAValidRegion(ImmutableList.<Boundary>builder().
+                add(new Boundary(0, 6, 5, 1)).
                 build()
         );
     }
 
-    public RectangleServiceDefaultBDD givenComplexRegion() {
-        return givenAValidRegion(ImmutableList.<Rectangle>builder().
-                add(new Rectangle(0, 3, 2, 0)).
-                add(new Rectangle(0, 5, 2, 3)).
-                add(new Rectangle(1, 4, 4, 2)).
-                add(new Rectangle(2, 3, 4, 0)).
-                add(new Rectangle(2, 5, 6, 3)).
-                add(new Rectangle(3, 3, 6, 0)).
+    public BoundaryServiceDefaultBDD givenComplexRegion() {
+        return givenAValidRegion(ImmutableList.<Boundary>builder().
+                add(new Boundary(0, 3, 2, 0)).
+                add(new Boundary(0, 5, 2, 3)).
+                add(new Boundary(1, 4, 4, 2)).
+                add(new Boundary(2, 3, 4, 0)).
+                add(new Boundary(2, 5, 6, 3)).
+                add(new Boundary(3, 3, 6, 0)).
                 build()
         );
     }
 
-    public RectangleServiceDefaultBDD andAPoint(final Integer x, final Integer y) {
+    public BoundaryServiceDefaultBDD andAPoint(final Integer x, final Integer y) {
         point = new Point(x, y);
         return this;
     }
 
-    public RectangleServiceDefaultBDD whenGetRectanglesByPoint() {
-        rectanglesByPoint = rectangleService.findRectanglesByPoint(point);
+    public BoundaryServiceDefaultBDD whenGetBoundariesByPoint() {
+        boundariesByPoint = boundaryService.findByPoint(point);
         return this;
     }
 
-    public RectangleServiceDefaultBDD thenShouldBeExistExactlyNRectangles(final Integer quantityOfRectangles) {
-        assertThat(rectanglesByPoint, is(notNullValue()));
-        assertThat(rectanglesByPoint.size(), is(equalTo(quantityOfRectangles)));
+    public BoundaryServiceDefaultBDD thenShouldBeExistExactlyNBoundaries(final Integer quantityOfBoundaries) {
+        assertThat(boundariesByPoint, is(notNullValue()));
+        assertThat(boundariesByPoint.size(), is(equalTo(quantityOfBoundaries)));
         return this;
     }
 
-    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
-        return thenShouldHaveThisRectangle(new Rectangle(upperLeftX, upperLeftY, rightBottomX, rightBottomY));
+    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
+        return thenShouldHaveThisBoundary(new Boundary(upperLeftX, upperLeftY, rightBottomX, rightBottomY));
     }
 
-    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Rectangle rectangle) {
-        assertThat(rectanglesByPoint.contains(rectangle), is(true));
+    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Boundary boundary) {
+        assertThat(boundariesByPoint.contains(boundary), is(true));
         return this;
     }
 

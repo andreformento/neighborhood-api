@@ -2,17 +2,17 @@ package com.formento.neighborhood.model;
 
 import java.util.Objects;
 
-public class Rectangle implements Comparable<Rectangle> {
+public class Boundary implements Comparable<Boundary> {
 
     private final Point upperLeft;
     private final Point rightBottom;
 
-    public Rectangle(Point upperLeft, Point rightBottom) {
+    public Boundary(Point upperLeft, Point rightBottom) {
         this.upperLeft = upperLeft;
         this.rightBottom = rightBottom;
     }
 
-    public Rectangle(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
+    public Boundary(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
         this(new Point(upperLeftX, upperLeftY), new Point(rightBottomX, rightBottomY));
     }
 
@@ -33,12 +33,12 @@ public class Rectangle implements Comparable<Rectangle> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Rectangle)) {
+        if (!(o instanceof Boundary)) {
             return false;
         }
-        Rectangle rectangle = (Rectangle) o;
-        return Objects.equals(upperLeft, rectangle.upperLeft) &&
-            Objects.equals(rightBottom, rectangle.rightBottom);
+        Boundary boundary = (Boundary) o;
+        return Objects.equals(upperLeft, boundary.upperLeft) &&
+            Objects.equals(rightBottom, boundary.rightBottom);
     }
 
     @Override
@@ -48,14 +48,14 @@ public class Rectangle implements Comparable<Rectangle> {
 
     @Override
     public String toString() {
-        return "Rectangle(" +
+        return "Boundary(" +
             "upperLeft=" + getUpperLeft() +
             ", rightBottom=" + getRightBottom() +
             ')';
     }
 
     @Override
-    public int compareTo(Rectangle o) {
+    public int compareTo(Boundary o) {
         final int compare = upperLeft.compareTo(o.upperLeft);
         if (compare == 0) {
             return rightBottom.compareTo(o.rightBottom);
