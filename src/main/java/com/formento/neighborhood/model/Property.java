@@ -1,5 +1,6 @@
 package com.formento.neighborhood.model;
 
+import java.beans.ConstructorProperties;
 import java.io.Serializable;
 
 public class Property implements Serializable {
@@ -13,7 +14,7 @@ public class Property implements Serializable {
     private final Short baths;
     private final Integer squareMeters;
 
-    //@ConstructorProperties({"id", "title", "price"})
+    @ConstructorProperties({"id", "title", "price", "description", "point", "beds", "baths", "squareMeters"})
     public Property(Long id, String title, Integer price, String description, Point point, Short beds, Short baths, Integer squareMeters) {
         this.id = id;
         this.title = title;
@@ -23,6 +24,38 @@ public class Property implements Serializable {
         this.beds = beds;
         this.baths = baths;
         this.squareMeters = squareMeters;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public Short getBeds() {
+        return beds;
+    }
+
+    public Short getBaths() {
+        return baths;
+    }
+
+    public Integer getSquareMeters() {
+        return squareMeters;
     }
 
 }

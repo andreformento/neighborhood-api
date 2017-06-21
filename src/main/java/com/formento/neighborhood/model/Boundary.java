@@ -1,5 +1,6 @@
 package com.formento.neighborhood.model;
 
+import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public class Boundary implements Serializable, Comparable<Boundary> {
     private final Point upperLeft;
     private final Point rightBottom;
 
+    @ConstructorProperties({"upperLeft", "rightBottom"})
     public Boundary(Point upperLeft, Point rightBottom) {
         this.upperLeft = upperLeft;
         this.rightBottom = rightBottom;

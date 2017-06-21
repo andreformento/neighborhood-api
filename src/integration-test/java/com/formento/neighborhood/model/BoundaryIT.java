@@ -1,5 +1,14 @@
 package com.formento.neighborhood.model;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Test;
+
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -14,7 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PointIT {
+public class BoundaryIT {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -22,11 +31,11 @@ public class PointIT {
     @Test
     public void shoudSerialize() throws JsonProcessingException {
         // given
-        final Point point = new Point(1, 2);
-        final String json = "{\"x\": 1, \"y\": 2}";
+        final Boundary boundary = new Boundary(new Point(1, 2),new Point(3, 4));
+        final String json = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"rightBottom\": {\"x\": 3, \"y\": 4}}";
 
         // when
-        final String result = objectMapper.writeValueAsString(point);
+        final String result = objectMapper.writeValueAsString(boundary);
 
         // then
         assertThatJson(result).isEqualTo(json);
@@ -35,14 +44,14 @@ public class PointIT {
     @Test
     public void shoudDeserialize() throws IOException {
         // given
-        final Point point = new Point(1, 2);
-        final String json = "{\"x\": 1, \"y\": 2}";
+        final Boundary boundary = new Boundary(new Point(1, 2),new Point(3, 4));
+        final String json = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"rightBottom\": {\"x\": 3, \"y\": 4}}";
 
         // when
-        final Point result = objectMapper.readValue(json, Point.class);
+        final Boundary result = objectMapper.readValue(json, Boundary.class);
 
         // then
-        assertThat(result).isEqualTo(point);
+        assertThat(result).isEqualTo(boundary);
     }
 
 }
