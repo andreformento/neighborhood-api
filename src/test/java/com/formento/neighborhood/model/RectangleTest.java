@@ -19,7 +19,7 @@ public class RectangleTest {
     @Test
     public void shouldBeInside() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(3, 4);
 
         // when
@@ -30,9 +30,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderXLeftBottom() {
+    public void shouldBeInsideOnTheBorderXLeftTop() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(1, 4);
 
         // when
@@ -43,9 +43,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderYLeftBottom() {
+    public void shouldBeInsideOnTheBorderYLeftTop() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(3, 2);
 
         // when
@@ -56,9 +56,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderXRightTop() {
+    public void shouldBeInsideOnTheBorderXRightBottom() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(6, 2);
 
         // when
@@ -69,9 +69,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderYRightTop() {
+    public void shouldBeInsideOnTheBorderYRightBottom() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(4, 7);
 
         // when
@@ -82,9 +82,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderXLeftBottom() {
+    public void shouldNotBeInsideOnTheBorderXLeftTop() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(0, 4);
 
         // when
@@ -95,9 +95,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderYLeftBottom() {
+    public void shouldNotBeInsideOnTheBorderYLeftTop() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(3, 1);
 
         // when
@@ -108,9 +108,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderXRightTop() {
+    public void shouldNotBeInsideOnTheBorderXRightBottom() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(7, 3);
 
         // when
@@ -121,9 +121,9 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderYRightTop() {
+    public void shouldNotBeInsideOnTheBorderYRightBottom() {
         // given
-        final Rectangle rectangle = new Rectangle(1, 2, 6, 7);
+        final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(5, 8);
 
         // when
@@ -142,7 +142,7 @@ public class RectangleTest {
         final String printedRectangle = rectangle.toString();
 
         // then
-        assertThat(printedRectangle, is(equalTo("Rectangle(leftBottom=Point(x=4, y=0), rightTop=Point(x=6, y=3))")));
+        assertThat(printedRectangle, is(equalTo("Rectangle(leftTop=Point(x=4, y=0), rightBottom=Point(x=6, y=3))")));
     }
 
 }

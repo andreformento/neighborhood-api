@@ -34,11 +34,11 @@ public class Point implements Comparable<Point> {
     }
 
     public Boolean lessThanOrEqualTo(final Point other) {
-        return compareToX(other) <= 0 && compareToY(other) <= 0;
+        return compareToX(other) <= 0 && compareToY(other) >= 0;
     }
 
     public Boolean greaterThanOrEqualTo(final Point other) {
-        return compareToX(other) >= 0 && compareToY(other) >= 0;
+        return compareToX(other) >= 0 && compareToY(other) <= 0;
     }
 
     @Override

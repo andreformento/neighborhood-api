@@ -30,7 +30,7 @@ public class RectangleServiceDefaultTest {
                 andAPoint(2, 3).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(1).
-                thenShouldHaveThisRectangle(0, 1, 5, 6);
+                thenShouldHaveThisRectangle(0, 6, 5, 1);
     }
 
     @Test
@@ -40,17 +40,17 @@ public class RectangleServiceDefaultTest {
                 andAPoint(5, 2).
                 whenGetRectanglesByPoint().whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(1).
-                thenShouldHaveThisRectangle(3, 0, 6, 3);
+                thenShouldHaveThisRectangle(3, 3, 6, 0);
     }
 
     @Test
-    public void shouldFindPointInsideComplexRectangleOnLeftBottomBorder() {
+    public void shouldFindPointInsideComplexRectangleOnLeftTopBorder() {
         rectangleServiceDefaultBDD.
                 givenComplexRegion().
                 andAPoint(0, 0).
                 whenGetRectanglesByPoint().whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(1).
-                thenShouldHaveThisRectangle(0, 0, 2, 3);
+                thenShouldHaveThisRectangle(0, 3, 2, 0);
     }
 
     @Test
@@ -63,13 +63,13 @@ public class RectangleServiceDefaultTest {
     }
 
     @Test
-    public void shouldFindPointInsideComplexRectangleOnRightTopBorder() {
+    public void shouldFindPointInsideComplexRectangleOnRightBottomBorder() {
         rectangleServiceDefaultBDD.
                 givenComplexRegion().
                 andAPoint(6, 5).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(1).
-                thenShouldHaveThisRectangle(2, 3, 6, 5);
+                thenShouldHaveThisRectangle(2, 5, 6, 3);
     }
 
     @Test
@@ -79,8 +79,8 @@ public class RectangleServiceDefaultTest {
                 andAPoint(3, 1).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(2).
-                thenShouldHaveThisRectangle(2, 0, 4, 3).
-                thenShouldHaveThisRectangle(3, 0, 6, 3);
+                thenShouldHaveThisRectangle(2, 3, 4, 0).
+                thenShouldHaveThisRectangle(3, 3, 6, 0);
     }
 
     @Test
@@ -90,8 +90,8 @@ public class RectangleServiceDefaultTest {
                 andAPoint(1, 4).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(2).
-                thenShouldHaveThisRectangle(0, 3, 2, 5).
-                thenShouldHaveThisRectangle(1, 2, 4, 4);
+                thenShouldHaveThisRectangle(0, 5, 2, 3).
+                thenShouldHaveThisRectangle(1, 4, 4, 2);
     }
 
     @Test
@@ -101,10 +101,10 @@ public class RectangleServiceDefaultTest {
                 andAPoint(4, 3).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(4).
-                thenShouldHaveThisRectangle(1, 2, 4, 4).
-                thenShouldHaveThisRectangle(2, 0, 4, 3).
-                thenShouldHaveThisRectangle(2, 3, 6, 5).
-                thenShouldHaveThisRectangle(3, 0, 6, 3);
+                thenShouldHaveThisRectangle(1, 4, 4, 2).
+                thenShouldHaveThisRectangle(2, 3, 4, 0).
+                thenShouldHaveThisRectangle(2, 5, 6, 3).
+                thenShouldHaveThisRectangle(3, 3, 6, 0);
     }
 
     @Test
@@ -114,11 +114,11 @@ public class RectangleServiceDefaultTest {
                 andAPoint(2, 3).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(5).
-                thenShouldHaveThisRectangle(0, 0, 2, 3).
-                thenShouldHaveThisRectangle(0, 3, 2, 5).
-                thenShouldHaveThisRectangle(1, 2, 4, 4).
-                thenShouldHaveThisRectangle(2, 0, 4, 3).
-                thenShouldHaveThisRectangle(2, 3, 6, 5);
+                thenShouldHaveThisRectangle(0, 3, 2, 0).
+                thenShouldHaveThisRectangle(0, 5, 2, 3).
+                thenShouldHaveThisRectangle(1, 4, 4, 2).
+                thenShouldHaveThisRectangle(2, 3, 4, 0).
+                thenShouldHaveThisRectangle(2, 5, 6, 3);
     }
 
     @Test
@@ -128,10 +128,10 @@ public class RectangleServiceDefaultTest {
                 andAPoint(3, 3).
                 whenGetRectanglesByPoint().
                 thenShouldBeExistExactlyNRectangles(4).
-                thenShouldHaveThisRectangle(1, 2, 4, 4).
-                thenShouldHaveThisRectangle(2, 0, 4, 3).
-                thenShouldHaveThisRectangle(2, 3, 6, 5).
-                thenShouldHaveThisRectangle(3, 0, 6, 3);
+                thenShouldHaveThisRectangle(1, 4, 4, 2).
+                thenShouldHaveThisRectangle(2, 3, 4, 0).
+                thenShouldHaveThisRectangle(2, 5, 6, 3).
+                thenShouldHaveThisRectangle(3, 3, 6, 0);
     }
 
 }

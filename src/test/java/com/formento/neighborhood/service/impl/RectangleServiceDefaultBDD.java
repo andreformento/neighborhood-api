@@ -35,19 +35,19 @@ class RectangleServiceDefaultBDD {
 
     public RectangleServiceDefaultBDD givenSimpleRegion() {
         return givenAValidRegion(ImmutableList.<Rectangle>builder().
-                add(new Rectangle(0, 1, 5, 6)).
+                add(new Rectangle(0, 6, 5, 1)).
                 build()
         );
     }
 
     public RectangleServiceDefaultBDD givenComplexRegion() {
         return givenAValidRegion(ImmutableList.<Rectangle>builder().
-                add(new Rectangle(0, 0, 2, 3)).
-                add(new Rectangle(0, 3, 2, 5)).
-                add(new Rectangle(1, 2, 4, 4)).
-                add(new Rectangle(2, 0, 4, 3)).
-                add(new Rectangle(2, 3, 6, 5)).
-                add(new Rectangle(3, 0, 6, 3)).
+                add(new Rectangle(0, 3, 2, 0)).
+                add(new Rectangle(0, 5, 2, 3)).
+                add(new Rectangle(1, 4, 4, 2)).
+                add(new Rectangle(2, 3, 4, 0)).
+                add(new Rectangle(2, 5, 6, 3)).
+                add(new Rectangle(3, 3, 6, 0)).
                 build()
         );
     }
@@ -68,8 +68,8 @@ class RectangleServiceDefaultBDD {
         return this;
     }
 
-    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Integer leftBottomX, final Integer leftBottomY, final Integer rightTopX, final Integer rightTopY) {
-        return thenShouldHaveThisRectangle(new Rectangle(leftBottomX, leftBottomY, rightTopX, rightTopY));
+    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Integer leftTopX, final Integer leftTopY, final Integer rightBottomX, final Integer rightBottomY) {
+        return thenShouldHaveThisRectangle(new Rectangle(leftTopX, leftTopY, rightBottomX, rightBottomY));
     }
 
     public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Rectangle rectangle) {

@@ -76,7 +76,7 @@ public class NodeTest {
         final Point point_13_15 = new Point(13, 15);
         final Point point_10_19 = new Point(10, 19);
 
-        final Rectangle rectangle = new Rectangle(10, 14, 17, 19);
+        final Rectangle rectangle = new Rectangle(10, 19, 17, 14);
 
         // when
         final Collection<Point> points = root.findPointsInsideRectangle(rectangle);
@@ -93,7 +93,7 @@ public class NodeTest {
         final Point point_10_19 = new Point(10, 19);
         final Point point_12_14 = new Point(12, 14);
 
-        final Rectangle rectangle = new Rectangle(10, 14, 17, 19);
+        final Rectangle rectangle = new Rectangle(10, 19, 17, 14);
 
         // when
         root.add(point_12_14);
