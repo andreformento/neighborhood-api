@@ -1,8 +1,9 @@
 package com.formento.neighborhood.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Boundary implements Comparable<Boundary> {
+public class Boundary implements Serializable, Comparable<Boundary> {
 
     private final Point upperLeft;
     private final Point rightBottom;

@@ -1,8 +1,9 @@
 package com.formento.neighborhood.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Point implements Comparable<Point> {
+public class Point implements Serializable, Comparable<Point> {
 
     private final Integer x;
     private final Integer y;
