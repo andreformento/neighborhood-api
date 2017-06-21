@@ -1,5 +1,6 @@
 package com.formento.neighborhood.model;
 
+import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ public class Point implements Serializable, Comparable<Point> {
     private final Integer x;
     private final Integer y;
 
+    @ConstructorProperties({"x", "y"})
     public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;
