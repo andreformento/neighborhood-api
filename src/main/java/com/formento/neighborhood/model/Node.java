@@ -1,6 +1,6 @@
 package com.formento.neighborhood.model;
 
-import com.formento.neighborhood.validation.DuplicatedNodeValidator;
+import com.formento.neighborhood.validation.DuplicatedPointValidator;
 import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class Node {
     }
 
     public Node add(final Point point) {
-        new DuplicatedNodeValidator(value).validate(point);
+        new DuplicatedPointValidator(value).validate(point);
 
         final Boolean isLeftWay = pointComparator.compare(point, value) < 0;
         final Optional<Node> nextNode = isLeftWay ? left : right;

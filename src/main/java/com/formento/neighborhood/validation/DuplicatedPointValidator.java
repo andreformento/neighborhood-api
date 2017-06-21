@@ -2,10 +2,10 @@ package com.formento.neighborhood.validation;
 
 import com.formento.neighborhood.model.Point;
 
-public class DuplicatedNodeValidator {
+public class DuplicatedPointValidator {
     private final Point value;
 
-    public DuplicatedNodeValidator(final Point value) {
+    public DuplicatedPointValidator(final Point value) {
         this.value = value;
     }
 
