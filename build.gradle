@@ -33,6 +33,13 @@ jacocoTestReport {
     }
 }
 
+//Configures the compile and runtime configurations for our integration tests
+//and includes the dependencies of the test task.
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
 
@@ -57,11 +64,6 @@ sourceSets {
         }
         resources.srcDir file('src/integration-test/resources')
     }
-}
-
-configurations {
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
 }
 
 task integrationTest(type: Test) {
