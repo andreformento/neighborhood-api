@@ -11,7 +11,7 @@ public class DuplicatedPointValidator {
 
     public void validate(final Point point) {
         if (value.equals(point)) {
-            throw new KdtreeDuplicationPointException("It is not possible insert duplicated points: " + value.toString());
+            throw new NeighborhoodDuplicationException("It is not possible insert duplicated points: " + value.toString());
         }
     }
 }

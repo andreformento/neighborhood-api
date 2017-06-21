@@ -13,15 +13,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PropertyImportFileIT {
+public class PropertyLoaderFileIT {
 
     @Autowired
-    private PropertyImportFile propertyImportFile;
+    private PropertyLoaderFile propertyImportFile;
 
     @Test
     public void shouldImportFromFile() throws IOException {
         // when
-        final Iterable<Property> properties = propertyImportFile.doImport();
+        final Iterable<Property> properties = propertyImportFile.load();
 
         // then
         assertThat(properties).isNotNull();

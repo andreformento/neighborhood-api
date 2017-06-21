@@ -1,16 +1,19 @@
 package com.formento.neighborhood.model;
 
-import static java.util.Collections.emptyList;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 public class Property implements Serializable {
 
-    private final Long id;
+    private final Optional<Long> id;
     private final String title;
     private final Integer price;
     private final String description;
@@ -20,9 +23,8 @@ public class Property implements Serializable {
     private final Integer squareMeters;
     private final Iterable<Province> provinces;
 
-
-    public Property(Long id, String title, Integer price, String description, Point point, Short beds, Short baths, Integer squareMeters,
-        Iterable<Province> provinces) {
+    public Property(@NotNull Optional<Long> id, @NotNull String title, @NotNull Integer price, @NotNull String description, @NotNull Point point,
+                    @NotNull Short beds, @NotNull Short baths, @NotNull Integer squareMeters, @NotNull Iterable<Province> provinces) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -36,7 +38,7 @@ public class Property implements Serializable {
 
     @JsonCreator
     public Property(
-        @JsonProperty(value = "id") Long id,
+        @JsonProperty(value = "id") Optional<Long> id,
         @JsonProperty(value = "title") String title,
         @JsonProperty(value = "price") Integer price,
         @JsonProperty(value = "description") String description,
@@ -47,7 +49,11 @@ public class Property implements Serializable {
         this(id, title, price, description, point, beds, baths, squareMeters, emptyList());
     }
 
-    public Long getId() {
+    public Property(Optional<Long> id, Property entity) {
+        this(id, entity.title, entity.price, entity.description, entity.point, entity.beds, entity.baths, entity.squareMeters, entity.provinces);
+    }
+
+    public Optional<Long> getId() {
         return id;
     }
 

@@ -44,17 +44,17 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
 
     compile('com.google.guava:guava:21.0')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('nl.jqno.equalsverifier:equalsverifier:2.3')
     testCompile("org.assertj:assertj-core:3.8.0")
 
-    integrationTestCompile("net.javacrumbs.json-unit:json-unit-fluent:1.23.0")
+    integrationTestCompile('net.javacrumbs.json-unit:json-unit-fluent:1.23.0')
 }
 
 check.dependsOn jacocoTestReport
 
-// ### integration-test
 sourceSets {
     integrationTest {
         java {

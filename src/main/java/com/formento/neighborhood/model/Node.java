@@ -8,19 +8,19 @@ import java.util.Optional;
 
 public class Node {
 
-    private final Point value;
-    private final PointComparator pointComparator;
+    private final Property value;
+    private final PropertyComparator propertyComparator;
     private Optional<Node> left;
     private Optional<Node> right;
 
-    public Node(final Point value, final Optional<Node> left, final Optional<Node> right, final PointComparator pointComparator) {
+    public Node(final Property value, final Optional<Node> left, final Optional<Node> right, final PropertyComparator propertyComparator) {
         this.value = value;
-        this.pointComparator = pointComparator;
+        this.propertyComparator = propertyComparator;
         this.left = left;
         this.right = right;
     }
 
-    public Point getValue() {
+    public Property getValue() {
         return value;
     }
 
@@ -32,25 +32,25 @@ public class Node {
         return right;
     }
 
-    public PointComparator getPointComparator() {
-        return pointComparator;
+    public PropertyComparator getPropertyComparator() {
+        return propertyComparator;
     }
 
-    public Node add(final Point point) {
-        new DuplicatedPointValidator(value).validate(point);
+    public Node add(final Property point) {
+        new DuplicatedPropertyValidator(value).validate(point);
 
-        final Boolean isLeftWay = pointComparator.compare(point, value) < 0;
+        final Boolean isLeftWay = propertyComparator.compare(point, value) < 0;
         final Optional<Node> nextNode = isLeftWay ? left : right;
 
         if (nextNode.isPresent()) {
             return nextNode.map(n -> n.add(point)).get();
         } else {
-            return generatePoint(point, isLeftWay);
+            return generateProperty(point, isLeftWay);
         }
     }
 
-    private Node generatePoint(final Point point, final Boolean isLeftWay) {
-        final Node node = new Node(point, left, right, pointComparator.getNextPointComparator());
+    private Node generateProperty(final Property point, final Boolean isLeftWay) {
+        final Node node = new Node(point, left, right, propertyComparator.getNextPropertyComparator());
 
         if (isLeftWay) {
             this.left = Optional.of(node);
@@ -61,35 +61,35 @@ public class Node {
         return node;
     }
 
-    public Collection<Point> findPointsInsideBoundary(final Boundary boundary) {
-        final ImmutableList.Builder<Point> builder = ImmutableList.builder();
+    public Collection<Property> findPropertiesInsideBoundary(final Boundary boundary) {
+        final ImmutableList.Builder<Property> builder = ImmutableList.builder();
 
-        findPointsInsideBoundary(boundary, builder, true);
+        findPropertiesInsideBoundary(boundary, builder, true);
 
         return builder.build();
     }
 
-    private void findPointsInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Point> builder, final boolean continueIfNotFound) {
+    private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder, final boolean continueIfNotFound) {
         final boolean goToTheUpperLeft;
         final boolean goToTheRightBottom;
         final boolean nextContinueIfNotFound;
-        if (boundary.containsPoint(value)) {
+        if (boundary.containsPoint(value.getPoint())) {
             builder.add(value);
             goToTheUpperLeft = true;
             goToTheRightBottom = true;
             nextContinueIfNotFound = false;
         } else {
             nextContinueIfNotFound = continueIfNotFound;
-            goToTheUpperLeft = nextContinueIfNotFound && pointComparator.compare(boundary.getUpperLeft(), value) < 0;
-            goToTheRightBottom = nextContinueIfNotFound && pointComparator.compare(boundary.getRightBottom(), value) > 0;
+            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(boundary.getUpperLeft(), value) < 0;
+            goToTheRightBottom = nextContinueIfNotFound && propertyComparator.compare(boundary.getRightBottom(), value) > 0;
         }
 
         left.
             filter(node -> goToTheUpperLeft).
-            ifPresent(node -> node.findPointsInsideBoundary(boundary, builder, nextContinueIfNotFound));
+            ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
         right.
             filter(node -> goToTheRightBottom).
-            ifPresent(node -> node.findPointsInsideBoundary(boundary, builder, nextContinueIfNotFound));
+            ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
     }
 
 }

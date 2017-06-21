@@ -24,7 +24,7 @@ public class BoundaryServiceDefault implements BoundaryService {
     @Override
     public Collection<Boundary> findByPoint(final Point point) {
         return boundaryRepository.
-                getAll().
+                findAll().
                 stream().
                 sorted().
                 filter(boundary -> boundary.containsPoint(point)).

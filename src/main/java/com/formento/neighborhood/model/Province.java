@@ -1,10 +1,14 @@
 package com.formento.neighborhood.model;
 
-public class Province {
+import java.beans.ConstructorProperties;
+import java.io.Serializable;
+
+public class Province implements Serializable {
 
     private final String description;
     private final Boundary boundary;
 
+    @ConstructorProperties({"description", "boundary"})
     public Province(String description, Boundary boundary) {
         this.description = description;
         this.boundary = boundary;

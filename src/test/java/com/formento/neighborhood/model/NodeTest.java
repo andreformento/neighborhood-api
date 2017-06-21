@@ -2,7 +2,7 @@ package com.formento.neighborhood.model;
 
 import com.formento.neighborhood.component.NodeFactory;
 import com.formento.neighborhood.component.impl.NodeFactoryDefault;
-import com.formento.neighborhood.validation.KdtreeDuplicationPointException;
+import com.formento.neighborhood.validation.NeighborhoodDuplicationException;
 import com.google.common.collect.ImmutableList;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -109,7 +109,7 @@ public class NodeTest {
         final Point point_3_6 = new Point(3, 6);
 
         // expected
-        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expect(NeighborhoodDuplicationException.class);
         expectedException.expectMessage("It is not possible insert duplicated points: " + point_3_6.toString());
 
         // when

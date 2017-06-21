@@ -1,11 +1,11 @@
 package com.formento.neighborhood.component.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.validation.KdtreeDuplicationPointException;
+import com.formento.neighborhood.validation.NeighborhoodDuplicationException;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
-import com.formento.neighborhood.model.PointComparatorX;
-import com.formento.neighborhood.model.PointComparatorY;
+import com.formento.neighborhood.model.PropertyComparatorX;
+import com.formento.neighborhood.model.PropertyComparatorY;
 import com.google.common.collect.ImmutableList;
 import org.assertj.core.api.OptionalAssert;
 import org.junit.Rule;
@@ -67,23 +67,23 @@ public class NodeFactoryDefaultTest {
 
         // then
         assertThat(root.getValue()).isEqualTo(point_9_1);
-        assertThat(root.getPointComparator()).isInstanceOf(PointComparatorX.class);
+        assertThat(root.getPropertyComparator()).isInstanceOf(PropertyComparatorX.class);
 
         final OptionalAssert<Node> leftLevel1 = assertThat(root.getLeft());
-        leftLevel1.map(Node::getPointComparator).containsInstanceOf(PointComparatorY.class);
+        leftLevel1.map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorY.class);
         leftLevel1.map(Node::getValue).hasValue(point_2_7);
         leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getValue).hasValue(point_3_6);
-        leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
         leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getValue).hasValue(point_6_12);
-        leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
 
         final OptionalAssert<Node> rightLevel1 = assertThat(root.getRight());
-        rightLevel1.map(Node::getPointComparator).containsInstanceOf(PointComparatorY.class);
+        rightLevel1.map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorY.class);
         rightLevel1.map(Node::getValue).hasValue(point_17_15);
         rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getValue).hasValue(point_13_15);
-        rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
         rightLevel1.map(Node::getRight).map(Optional::get).map(Node::getValue).hasValue(point_10_19);
-        rightLevel1.map(Node::getRight).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        rightLevel1.map(Node::getRight).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
     }
 
     /*
@@ -126,21 +126,21 @@ public class NodeFactoryDefaultTest {
 
         // then
         assertThat(root.getValue()).isEqualTo(point_10_19);
-        assertThat(root.getPointComparator()).isInstanceOf(PointComparatorX.class);
+        assertThat(root.getPropertyComparator()).isInstanceOf(PropertyComparatorX.class);
 
         final OptionalAssert<Node> leftLevel1 = assertThat(root.getLeft());
         leftLevel1.map(Node::getValue).hasValue(point_3_6);
-        leftLevel1.map(Node::getPointComparator).containsInstanceOf(PointComparatorY.class);
+        leftLevel1.map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorY.class);
         leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getValue).hasValue(point_9_1);
-        leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        leftLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
         leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getValue).hasValue(point_2_7);
-        leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        leftLevel1.map(Node::getRight).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
 
         final OptionalAssert<Node> rightLevel1 = assertThat(root.getRight());
         rightLevel1.map(Node::getValue).hasValue(point_17_15);
-        rightLevel1.map(Node::getPointComparator).containsInstanceOf(PointComparatorY.class);
+        rightLevel1.map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorY.class);
         rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getValue).hasValue(point_13_15);
-        rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPointComparator).containsInstanceOf(PointComparatorX.class);
+        rightLevel1.map(Node::getLeft).map(Optional::get).map(Node::getPropertyComparator).containsInstanceOf(PropertyComparatorX.class);
     }
 
     @Test
@@ -149,7 +149,7 @@ public class NodeFactoryDefaultTest {
         final List<Point> points = emptyList();
 
         // expected
-        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expect(NeighborhoodDuplicationException.class);
         expectedException.expectMessage("List of points cannot be empty");
 
         // when
@@ -168,7 +168,7 @@ public class NodeFactoryDefaultTest {
                 build();
 
         // expected
-        expectedException.expect(KdtreeDuplicationPointException.class);
+        expectedException.expect(NeighborhoodDuplicationException.class);
         expectedException.expectMessage("It is not possible insert duplicated points: Point(x=3, y=6)");
 
         // when

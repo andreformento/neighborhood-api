@@ -1,11 +1,8 @@
 package com.formento.neighborhood.component.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.validation.KdtreeDuplicationPointException;
-import com.formento.neighborhood.model.Node;
-import com.formento.neighborhood.model.Point;
-import com.formento.neighborhood.model.PointComparator;
-import com.formento.neighborhood.model.PointComparatorX;
+import com.formento.neighborhood.model.*;
+import com.formento.neighborhood.validation.NeighborhoodDuplicationException;
 import com.formento.neighborhood.validation.DuplicatedPointValidator;
 import com.google.common.collect.ImmutableList;
 import org.springframework.stereotype.Component;
@@ -18,45 +15,45 @@ import java.util.Optional;
 public class NodeFactoryDefault implements NodeFactory {
 
     @Override
-    public Node createRoot(final Collection<Point> points) {
-        if (points.isEmpty()) {
-            throw new KdtreeDuplicationPointException("List of points cannot be empty");
+    public Node createRoot(final Collection<Property> properties) {
+        if (properties.isEmpty()) {
+            throw new NeighborhoodDuplicationException("List of points cannot be empty");
         }
 
-        return createRoot(points, PointComparatorX.getInstance());
+        return createRoot(properties, PropertyComparatorX.getInstance());
     }
 
-    private Node createRoot(final Collection<Point> points, final PointComparator pointComparator) {
-        final List<Point> sortedPoints = ImmutableList.sortedCopyOf(pointComparator, points);
-        final Integer middle = sortedPoints.size() / 2;
+    private Node createRoot(final Collection<Property> properties, final PropertyComparator propertyComparator) {
+        final List<Property> sortedProperties = ImmutableList.sortedCopyOf(propertyComparator, properties);
+        final Integer middle = sortedProperties.size() / 2;
 
-        final PointComparator nextPointComparator = pointComparator.getNextPointComparator();
-        final Optional<Node> left = getLeftNode(sortedPoints, nextPointComparator, middle);
-        final Optional<Node> right = getRightNode(sortedPoints, nextPointComparator, middle);
+        final PropertyComparator nextPropertyComparator = propertyComparator.getNextPropertyComparator();
+        final Optional<Node> left = getLeftNode(sortedProperties, nextPropertyComparator, middle);
+        final Optional<Node> right = getRightNode(sortedProperties, nextPropertyComparator, middle);
 
-        final Point value = sortedPoints.get(middle);
+        final Property value = sortedProperties.get(middle);
 
-        final DuplicatedPointValidator duplicatedPointValidator = new DuplicatedPointValidator(value);
-        left.map(Node::getValue).ifPresent(duplicatedPointValidator::validate);
-        right.map(Node::getValue).ifPresent(duplicatedPointValidator::validate);
+        final DuplicatedPointValidator duplicatedPropertyValidator = new DuplicatedPointValidator(value.getPoint());
+        left.map(Node::getValue).ifPresent(duplicatedPropertyValidator::validate);
+        right.map(Node::getValue).ifPresent(duplicatedPropertyValidator::validate);
 
-        return new Node(value, left, right, pointComparator);
+        return new Node(value, left, right, propertyComparator);
     }
 
-    private Optional<Node> getLeftNode(final List<Point> allPoints, final PointComparator nextPointComparator, final Integer middle) {
+    private Optional<Node> getLeftNode(final List<Property> allProperties, final PropertyComparator nextPropertyComparator, final Integer middle) {
         if (middle >= 1) {
             final int fromIndex = 0;
-            return Optional.of(createRoot(allPoints.subList(fromIndex, middle), nextPointComparator));
+            return Optional.of(createRoot(allProperties.subList(fromIndex, middle), nextPropertyComparator));
         } else {
             return Optional.empty();
         }
     }
 
-    private Optional<Node> getRightNode(final List<Point> allPoints, final PointComparator nextPointComparator, final Integer middle) {
+    private Optional<Node> getRightNode(final List<Property> allProperties, final PropertyComparator nextPropertyComparator, final Integer middle) {
         final int fromIndex = middle + 1;
-        final int toIndex = allPoints.size();
+        final int toIndex = allProperties.size();
         if (fromIndex < toIndex) {
-            return Optional.of(createRoot(allPoints.subList(fromIndex, toIndex), nextPointComparator));
+            return Optional.of(createRoot(allProperties.subList(fromIndex, toIndex), nextPropertyComparator));
         } else {
             return Optional.empty();
         }

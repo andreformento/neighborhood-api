@@ -29,7 +29,7 @@ class BoundaryServiceDefaultBDD {
     }
 
     public BoundaryServiceDefaultBDD givenAValidRegion(final List<Boundary> boundaries) {
-        when(boundaryRepository.getAll()).thenReturn(boundaries);
+        when(boundaryRepository.findAll()).thenReturn(boundaries);
         return this;
     }
 

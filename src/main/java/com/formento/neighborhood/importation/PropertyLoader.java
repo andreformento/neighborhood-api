@@ -3,9 +3,10 @@ package com.formento.neighborhood.importation;
 import com.formento.neighborhood.model.Property;
 
 import java.io.IOException;
+import java.util.Collection;
 
-public interface PropertyImport {
+public interface PropertyLoader {
 
-    Iterable<Property> doImport() throws IOException;
+    Collection<Property> load() throws IOException;
 
 }

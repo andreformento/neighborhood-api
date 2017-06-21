@@ -1,0 +1,2 @@
+logging.level: INFO
+spring.jackson.deserialization.fail-on-unknown-properties: false

@@ -4,7 +4,6 @@ import com.formento.neighborhood.component.NodeFactory;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.Boundary;
-import com.formento.neighborhood.repository.PointRepository;
 import com.formento.neighborhood.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class PointServiceDefault implements PointService {
 
     @Autowired
     public PointServiceDefault(final NodeFactory nodeFactory, final PointRepository pointRepository) {
-        this.root = nodeFactory.createRoot(pointRepository.getAll());
+        this.root = nodeFactory.createRoot(pointRepository.findAll());
     }
 
     @Override

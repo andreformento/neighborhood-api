@@ -1,7 +1,7 @@
 package com.formento.neighborhood.importation.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.formento.neighborhood.importation.PropertyImport;
+import com.formento.neighborhood.importation.PropertyLoader;
 import com.formento.neighborhood.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -10,19 +10,20 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 @Component
-public class PropertyImportFile implements PropertyImport {
+public class PropertyLoaderFile implements PropertyLoader {
 
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public PropertyImportFile(ObjectMapper objectMapper) {
+    public PropertyLoaderFile(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
     @Override
-    public Iterable<Property> doImport() throws IOException {
+    public Collection<Property> load() throws IOException {
         final Resource resource = new ClassPathResource("properties.json");
         final File file = resource.getFile();
         final PropertyGroupInput propertyGroupInput = objectMapper.readValue(file, PropertyGroupInput.class);

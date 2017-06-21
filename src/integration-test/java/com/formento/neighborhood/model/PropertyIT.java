@@ -1,17 +1,20 @@
 package com.formento.neighborhood.model;
 
-import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
-import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import static java.util.Optional.empty;
+import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,7 +32,7 @@ public class PropertyIT {
             build();
 
         final Property property = new Property(
-            789L,
+            Optional.of(789L),
             "Imóvel código 1, com 5 quartos e 4 banheiros",
             1250000,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -62,7 +65,7 @@ public class PropertyIT {
     public void shoudDeserialize() throws IOException {
         // given
         final Property property = new Property(
-            789L,
+            empty(),
             "Imóvel código 1, com 5 quartos e 4 banheiros",
             1250000,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -71,7 +74,6 @@ public class PropertyIT {
             (short) 3,
             210);
         final String json = "{\n"
-            + "  \"id\": 789,\n"
             + "  \"x\": 222,\n"
             + "  \"y\": 444,\n"
             + "  \"title\": \"Imóvel código 1, com 5 quartos e 4 banheiros\",\n"
@@ -87,7 +89,6 @@ public class PropertyIT {
 
         // then
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(property.getId());
         assertThat(result.getTitle()).isEqualTo(property.getTitle());
         assertThat(result.getPrice()).isEqualTo(property.getPrice());
         assertThat(result.getDescription()).isEqualTo(property.getDescription());

@@ -5,10 +5,10 @@ import com.formento.neighborhood.model.Property;
 
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
+import java.util.Optional;
 
 class PropertyInput implements Serializable {
 
-    private final Long id;
     private final String title;
     private final Integer price;
     private final String description;
@@ -18,9 +18,8 @@ class PropertyInput implements Serializable {
     private final Short baths;
     private final Integer squareMeters;
 
-    @ConstructorProperties({"id", "title", "price", "description", "lat", "long", "beds", "baths", "squareMeters"})
-    PropertyInput(Long id, String title, Integer price, String description, Integer lat, Integer longi, Short beds, Short baths, Integer squareMeters) {
-        this.id = id;
+    @ConstructorProperties({"title", "price", "description", "lat", "long", "beds", "baths", "squareMeters"})
+    PropertyInput(String title, Integer price, String description, Integer lat, Integer longi, Short beds, Short baths, Integer squareMeters) {
         this.title = title;
         this.price = price;
         this.description = description;
@@ -33,7 +32,7 @@ class PropertyInput implements Serializable {
 
     public Property generateProperty() {
         return new Property(
-                id,
+                Optional.empty(),
                 title,
                 price,
                 description,
