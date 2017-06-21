@@ -32,11 +32,20 @@ public class PropertyIT {
             (short) 2,
             8795
         );
-        final String json = "{\"id\":789,\"title\":\"Property title\",\"price\":190000,\"description\":\"Property description\",\"point\":{\"x\":125,\"y\":248},\"beds\":5,\"baths\":2,\"squareMeters\":8795}";
+        final String json = "{\n"
+            + "    \"id\": 789,\n"
+            + "    \"title\": \"Property title\",\n"
+            + "    \"price\": 190000,\n"
+            + "    \"description\": \"Property description\",\n"
+            + "    \"x\": 125,\n"
+            + "    \"y\": 248,\n"
+            + "    \"beds\": 5,\n"
+            + "    \"baths\": 2,\n"
+            + "    \"squareMeters\": 8795\n"
+            + "}";
 
         // when
         final String result = objectMapper.writeValueAsString(property);
-        System.out.println(result);
 
         // then
         assertThatJson(result).isEqualTo(json);
@@ -56,7 +65,17 @@ public class PropertyIT {
             8795
         );
 
-        final String json = "{\"id\":789,\"title\":\"Property title\",\"price\":190000,\"description\":\"Property description\",\"point\":{\"x\":125,\"y\":248},\"beds\":5,\"baths\":2,\"squareMeters\":8795}";
+        final String json = "{\n"
+            + "    \"id\": 789,\n"
+            + "    \"title\": \"Property title\",\n"
+            + "    \"price\": 190000,\n"
+            + "    \"description\": \"Property description\",\n"
+            + "    \"x\": 125,\n"
+            + "    \"y\": 248,\n"
+            + "    \"beds\": 5,\n"
+            + "    \"baths\": 2,\n"
+            + "    \"squareMeters\": 8795\n"
+            + "}";
 
         // when
         final Property result = objectMapper.readValue(json, Property.class);
