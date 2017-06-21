@@ -20,8 +20,8 @@ public class BoundaryIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final Boundary boundary = new Boundary(new Point(1, 2),new Point(3, 4));
-    private final String json = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"rightBottom\": {\"x\": 3, \"y\": 4}}";
+    private static final Boundary boundary = new Boundary(new Point(1, 2),new Point(3, 4));
+    private static final String json = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"rightBottom\": {\"x\": 3, \"y\": 4}}";
 
     @Test
     public void shoudSerialize() throws JsonProcessingException {

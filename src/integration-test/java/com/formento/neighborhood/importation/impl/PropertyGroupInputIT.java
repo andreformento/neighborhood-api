@@ -1,7 +1,6 @@
 package com.formento.neighborhood.importation.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,6 @@ public class PropertyGroupInputIT {
     @Test
     public void shoudDeserialize() throws IOException {
         // given
-        final PropertyGroupInput propertyGroupInput = new PropertyGroupInput(
-                2,
-                ImmutableList.<PropertyInput>builder().
-                        add(new PropertyInput(1L, "Cod 1", 643000, "Laboris", 1257, 928, (short) 3, (short) 2, 61)).
-                        add(new PropertyInput(2L, "Cod 2", 949000, "Anim", 679, 680, (short) 4, (short) 3, 94)).
-                        build()
-        );
         final String json = "{\n" +
                 "  \"totalProperties\": 2,\n" +
                 "  \"properties\": [\n" +

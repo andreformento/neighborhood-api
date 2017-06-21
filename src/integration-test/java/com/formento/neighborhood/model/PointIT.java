@@ -20,8 +20,8 @@ public class PointIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final Point point = new Point(1, 2);
-    private final String json = "{\"x\": 1, \"y\": 2}";
+    private static final Point point = new Point(1, 2);
+    private static final String json = "{\"x\": 1, \"y\": 2}";
 
     @Test
     public void shoudSerialize() throws JsonProcessingException {
