@@ -68,8 +68,8 @@ class RectangleServiceDefaultBDD {
         return this;
     }
 
-    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Integer leftTopX, final Integer leftTopY, final Integer rightBottomX, final Integer rightBottomY) {
-        return thenShouldHaveThisRectangle(new Rectangle(leftTopX, leftTopY, rightBottomX, rightBottomY));
+    public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
+        return thenShouldHaveThisRectangle(new Rectangle(upperLeftX, upperLeftY, rightBottomX, rightBottomY));
     }
 
     public RectangleServiceDefaultBDD thenShouldHaveThisRectangle(final Rectangle rectangle) {

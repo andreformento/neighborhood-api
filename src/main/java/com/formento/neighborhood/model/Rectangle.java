@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Rectangle implements Comparable<Rectangle> {
 
-    private final Point leftTop;
+    private final Point upperLeft;
     private final Point rightBottom;
 
-    public Rectangle(Point leftTop, Point rightBottom) {
-        this.leftTop = leftTop;
+    public Rectangle(Point upperLeft, Point rightBottom) {
+        this.upperLeft = upperLeft;
         this.rightBottom = rightBottom;
     }
 
-    public Rectangle(final Integer leftTopX, final Integer leftTopY, final Integer rightBottomX, final Integer rightBottomY) {
-        this(new Point(leftTopX, leftTopY), new Point(rightBottomX, rightBottomY));
+    public Rectangle(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX, final Integer rightBottomY) {
+        this(new Point(upperLeftX, upperLeftY), new Point(rightBottomX, rightBottomY));
     }
 
-    public Point getLeftTop() {
-        return leftTop;
+    public Point getUpperLeft() {
+        return upperLeft;
     }
 
     public Point getRightBottom() {
@@ -25,7 +25,7 @@ public class Rectangle implements Comparable<Rectangle> {
     }
 
     public Boolean containsPoint(final Point point) {
-        return leftTop.lessThanOrEqualTo(point) && rightBottom.greaterThanOrEqualTo(point);
+        return upperLeft.lessThanOrEqualTo(point) && rightBottom.greaterThanOrEqualTo(point);
     }
 
     @Override
@@ -37,26 +37,26 @@ public class Rectangle implements Comparable<Rectangle> {
             return false;
         }
         Rectangle rectangle = (Rectangle) o;
-        return Objects.equals(leftTop, rectangle.leftTop) &&
+        return Objects.equals(upperLeft, rectangle.upperLeft) &&
             Objects.equals(rightBottom, rectangle.rightBottom);
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(leftTop, rightBottom);
+        return Objects.hash(upperLeft, rightBottom);
     }
 
     @Override
     public String toString() {
         return "Rectangle(" +
-            "leftTop=" + getLeftTop() +
+            "upperLeft=" + getUpperLeft() +
             ", rightBottom=" + getRightBottom() +
             ')';
     }
 
     @Override
     public int compareTo(Rectangle o) {
-        final int compare = leftTop.compareTo(o.leftTop);
+        final int compare = upperLeft.compareTo(o.upperLeft);
         if (compare == 0) {
             return rightBottom.compareTo(o.rightBottom);
         }

@@ -44,7 +44,7 @@ public class RectangleServiceDefaultTest {
     }
 
     @Test
-    public void shouldFindPointInsideComplexRectangleOnLeftTopBorder() {
+    public void shouldFindPointInsideComplexRectangleOnUpperLeftBorder() {
         rectangleServiceDefaultBDD.
                 givenComplexRegion().
                 andAPoint(0, 0).

@@ -70,22 +70,22 @@ public class Node {
     }
 
     private void findPointsInsideRectangle(final Rectangle rectangle, final ImmutableList.Builder<Point> builder, final boolean continueIfNotFound) {
-        final boolean goToTheLeftTop;
+        final boolean goToTheUpperLeft;
         final boolean goToTheRightBottom;
         final boolean nextContinueIfNotFound;
         if (rectangle.containsPoint(value)) {
             builder.add(value);
-            goToTheLeftTop = true;
+            goToTheUpperLeft = true;
             goToTheRightBottom = true;
             nextContinueIfNotFound = false;
         } else {
             nextContinueIfNotFound = continueIfNotFound;
-            goToTheLeftTop = nextContinueIfNotFound && pointComparator.compare(rectangle.getLeftTop(), value) < 0;
+            goToTheUpperLeft = nextContinueIfNotFound && pointComparator.compare(rectangle.getUpperLeft(), value) < 0;
             goToTheRightBottom = nextContinueIfNotFound && pointComparator.compare(rectangle.getRightBottom(), value) > 0;
         }
 
         left.
-            filter(node -> goToTheLeftTop).
+            filter(node -> goToTheUpperLeft).
             ifPresent(node -> node.findPointsInsideRectangle(rectangle, builder, nextContinueIfNotFound));
         right.
             filter(node -> goToTheRightBottom).

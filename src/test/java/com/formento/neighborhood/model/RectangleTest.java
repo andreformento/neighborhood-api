@@ -30,7 +30,7 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderXLeftTop() {
+    public void shouldBeInsideOnTheBorderXUpperLeft() {
         // given
         final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(1, 4);
@@ -43,7 +43,7 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderYLeftTop() {
+    public void shouldBeInsideOnTheBorderYUpperLeft() {
         // given
         final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(3, 2);
@@ -82,7 +82,7 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderXLeftTop() {
+    public void shouldNotBeInsideOnTheBorderXUpperLeft() {
         // given
         final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(0, 4);
@@ -95,7 +95,7 @@ public class RectangleTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderYLeftTop() {
+    public void shouldNotBeInsideOnTheBorderYUpperLeft() {
         // given
         final Rectangle rectangle = new Rectangle(1, 7, 6, 2);
         final Point point = new Point(3, 1);
@@ -142,7 +142,7 @@ public class RectangleTest {
         final String printedRectangle = rectangle.toString();
 
         // then
-        assertThat(printedRectangle, is(equalTo("Rectangle(leftTop=Point(x=4, y=0), rightBottom=Point(x=6, y=3))")));
+        assertThat(printedRectangle, is(equalTo("Rectangle(upperLeft=Point(x=4, y=0), rightBottom=Point(x=6, y=3))")));
     }
 
 }
