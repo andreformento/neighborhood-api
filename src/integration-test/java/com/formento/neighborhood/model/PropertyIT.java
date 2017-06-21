@@ -24,24 +24,24 @@ public class PropertyIT {
         // given
         final Property property = new Property(
             789L,
-            "Property title",
-            190000,
-            "Property description",
-            new Point(125, 248),
-            (short) 5,
-            (short) 2,
-            8795
+            "Imóvel código 1, com 5 quartos e 4 banheiros",
+            1250000,
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            new Point(222, 444),
+            (short) 4,
+            (short) 3,
+            210
         );
         final String json = "{\n"
-            + "    \"id\": 789,\n"
-            + "    \"title\": \"Property title\",\n"
-            + "    \"price\": 190000,\n"
-            + "    \"description\": \"Property description\",\n"
-            + "    \"x\": 125,\n"
-            + "    \"y\": 248,\n"
-            + "    \"beds\": 5,\n"
-            + "    \"baths\": 2,\n"
-            + "    \"squareMeters\": 8795\n"
+            + "  \"id\": 789,\n"
+            + "  \"x\": 222,\n"
+            + "  \"y\": 444,\n"
+            + "  \"title\": \"Imóvel código 1, com 5 quartos e 4 banheiros\",\n"
+            + "  \"price\": 1250000,\n"
+            + "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n"
+            + "  \"beds\": 4,\n"
+            + "  \"baths\": 3,\n"
+            + "  \"squareMeters\": 210\n"
             + "}";
 
         // when
@@ -56,25 +56,24 @@ public class PropertyIT {
         // given
         final Property property = new Property(
             789L,
-            "Property title",
-            190000,
-            "Property description",
-            new Point(125, 248),
-            (short) 5,
-            (short) 2,
-            8795
+            "Imóvel código 1, com 5 quartos e 4 banheiros",
+            1250000,
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            new Point(222, 444),
+            (short) 4,
+            (short) 3,
+            210
         );
-
         final String json = "{\n"
-            + "    \"id\": 789,\n"
-            + "    \"title\": \"Property title\",\n"
-            + "    \"price\": 190000,\n"
-            + "    \"description\": \"Property description\",\n"
-            + "    \"x\": 125,\n"
-            + "    \"y\": 248,\n"
-            + "    \"beds\": 5,\n"
-            + "    \"baths\": 2,\n"
-            + "    \"squareMeters\": 8795\n"
+            + "  \"id\": 789,\n"
+            + "  \"x\": 222,\n"
+            + "  \"y\": 444,\n"
+            + "  \"title\": \"Imóvel código 1, com 5 quartos e 4 banheiros\",\n"
+            + "  \"price\": 1250000,\n"
+            + "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\",\n"
+            + "  \"beds\": 4,\n"
+            + "  \"baths\": 3,\n"
+            + "  \"squareMeters\": 210\n"
             + "}";
 
         // when
