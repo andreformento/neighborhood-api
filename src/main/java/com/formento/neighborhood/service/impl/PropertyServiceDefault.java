@@ -32,11 +32,11 @@ public class PropertyServiceDefault implements PropertyService {
     }
 
     @Override
-    public Property addProperty(final Property property) {
+    public Property create(final Property property) {
         final Collection<Province> provinces = provinceService.findByPoint(property.getPoint());
         final Property entity = new Property(property, provinces);
 
-        propertyValidation.validateBeforeInsert(property);
+        propertyValidation.validateBeforeInsert(entity);
 
         return root.add(propertyRepository.insert(entity)).getValue();
     }

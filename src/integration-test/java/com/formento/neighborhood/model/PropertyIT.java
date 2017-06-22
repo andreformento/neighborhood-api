@@ -4,18 +4,20 @@ import static java.util.Collections.emptyList;
 import static java.util.Optional.empty;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.fail;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formento.neighborhood.validation.PropertyValidation;
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,9 +26,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PropertyIT {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -138,7 +137,7 @@ public class PropertyIT {
         final Property property = new Property(
             empty(),
             null,
-            0,
+            null,
             "",
             new Point(0, null),
             10,
@@ -146,11 +145,13 @@ public class PropertyIT {
             5,
             emptyList());
 
-        // expected exception
-        expectedException.expect(ConstraintViolationException.class);
-
         // when
-        propertyValidation.validateBeforeInsert(property);
+        try {
+            propertyValidation.validateBeforeInsert(property);
+            fail("Should throw exception");
+        } catch (ConstraintViolationException e) {
+            assertThat(new ArrayList<>(e.getConstraintViolations())).asList().hasSize(8);
+        }
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface PropertyService {
 
-    Property addProperty(final Property property);
+    Property create(final Property property);
 
     Property findById(final Long id);
 

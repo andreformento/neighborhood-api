@@ -9,21 +9,25 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Optional;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.validation.annotation.Validated;
 
 public class Property implements Serializable {
 
     private final Optional<Long> id;
     @NotEmpty
     private final String title;
+    @NotNull
     @Min(0)
     private final Integer price;
     @NotEmpty
     private final String description;
     @NotNull
+    @Valid
     private final Point point;
     @Min(1)
     @Max(5)

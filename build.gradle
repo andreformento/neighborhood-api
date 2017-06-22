@@ -51,6 +51,9 @@ dependencies {
     testCompile("org.assertj:assertj-core:3.8.0")
 
     integrationTestCompile('net.javacrumbs.json-unit:json-unit-fluent:1.23.0')
+    integrationTestCompile('io.rest-assured:rest-assured:3.0.3')
+    integrationTestCompile('io.rest-assured:json-schema-validator:3.0.3')
+    integrationTestCompile('io.rest-assured:spring-mock-mvc:3.0.3')
 }
 
 check.dependsOn jacocoTestReport

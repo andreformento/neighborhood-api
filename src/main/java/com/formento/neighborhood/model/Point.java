@@ -3,16 +3,23 @@ package com.formento.neighborhood.model;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 public class Point implements Serializable, Comparable<Point> {
 
+    @NotNull
     @Min(0)
     private final Integer x;
+    @NotNull
     @Min(0)
     private final Integer y;
 
     @ConstructorProperties({"x", "y"})
+    @Valid
     public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;

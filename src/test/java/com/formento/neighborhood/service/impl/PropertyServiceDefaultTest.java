@@ -16,7 +16,6 @@ import com.formento.neighborhood.repository.PropertyRepository;
 import com.formento.neighborhood.service.ProvinceService;
 import com.formento.neighborhood.validation.PropertyValidation;
 import java.util.Optional;
-import javax.validation.Validator;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -87,7 +86,7 @@ public class PropertyServiceDefaultTest {
         when(propertyRepository.insert(property)).thenReturn(property);
         when(node.add(any(Property.class))).thenReturn(node);
         when(node.getValue()).thenReturn(property);
-        final Property result = propertyServiceDefault.addProperty(property);
+        final Property result = propertyServiceDefault.create(property);
 
         // then
         assertThat(result).isNotNull();
