@@ -109,4 +109,15 @@ public class PropertyControllerIT {
                 content("provinces", contains("Nova"));
     }
 
+    @Test
+    public void shouldNotFindByIdWhenNotExists() {
+        given.
+                accept(ContentType.JSON).
+                contentType(MediaType.APPLICATION_JSON_VALUE).
+            when().
+                get("/properties/9999999").
+            then().
+                statusCode(is(HttpStatus.NOT_FOUND.value()));
+    }
+
 }
