@@ -19,25 +19,25 @@ public class BoundaryIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final Boundary boundary = new Boundary(new Point(1, 2), new Point(3, 4));
-    private static final String json = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"rightBottom\": {\"x\": 3, \"y\": 4}}";
+    private static final Boundary BOUNDARY = new Boundary(new Point(1, 2), new Point(3, 4));
+    private static final String JSON = "{\"upperLeft\": {\"x\": 1, \"y\": 2}, \"bottomRight\": {\"x\": 3, \"y\": 4}}";
 
     @Test
     public void shoudSerialize() throws JsonProcessingException {
         // when
-        final String result = objectMapper.writeValueAsString(boundary);
+        final String result = objectMapper.writeValueAsString(BOUNDARY);
 
         // then
-        assertThatJson(result).isEqualTo(json);
+        assertThatJson(result).isEqualTo(JSON);
     }
 
     @Test
     public void shoudDeserialize() throws IOException {
         // when
-        final Boundary result = objectMapper.readValue(json, Boundary.class);
+        final Boundary result = objectMapper.readValue(JSON, Boundary.class);
 
         // then
-        assertThat(result).isEqualTo(boundary);
+        assertThat(result).isEqualTo(BOUNDARY);
     }
 
 }

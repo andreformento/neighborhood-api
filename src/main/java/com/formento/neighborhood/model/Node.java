@@ -68,24 +68,24 @@ public class Node {
     private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder,
         final boolean continueIfNotFound) {
         final boolean goToTheUpperLeft;
-        final boolean goToTheRightBottom;
+        final boolean goToTheBottomRight;
         final boolean nextContinueIfNotFound;
         if (boundary.containsPoint(value.getPoint())) {
             builder.add(value);
             goToTheUpperLeft = true;
-            goToTheRightBottom = true;
+            goToTheBottomRight = true;
             nextContinueIfNotFound = false;
         } else {
             nextContinueIfNotFound = continueIfNotFound;
             goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(boundary.getUpperLeft(), value.getPoint()) < 0;
-            goToTheRightBottom = nextContinueIfNotFound && propertyComparator.compare(boundary.getRightBottom(), value.getPoint()) > 0;
+            goToTheBottomRight = nextContinueIfNotFound && propertyComparator.compare(boundary.getBottomRight(), value.getPoint()) > 0;
         }
 
         left.
             filter(node -> goToTheUpperLeft).
             ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
         right.
-            filter(node -> goToTheRightBottom).
+            filter(node -> goToTheBottomRight).
             ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
     }
 

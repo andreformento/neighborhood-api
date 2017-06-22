@@ -56,7 +56,7 @@ public class BoundaryTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderXRightBottom() {
+    public void shouldBeInsideOnTheBorderXBottomRight() {
         // given
         final Boundary boundary = new Boundary(1, 7, 6, 2);
         final Point point = new Point(6, 2);
@@ -69,7 +69,7 @@ public class BoundaryTest {
     }
 
     @Test
-    public void shouldBeInsideOnTheBorderYRightBottom() {
+    public void shouldBeInsideOnTheBorderYBottomRight() {
         // given
         final Boundary boundary = new Boundary(1, 7, 6, 2);
         final Point point = new Point(4, 7);
@@ -108,7 +108,7 @@ public class BoundaryTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderXRightBottom() {
+    public void shouldNotBeInsideOnTheBorderXBottomRight() {
         // given
         final Boundary boundary = new Boundary(1, 7, 6, 2);
         final Point point = new Point(7, 3);
@@ -121,7 +121,7 @@ public class BoundaryTest {
     }
 
     @Test
-    public void shouldNotBeInsideOnTheBorderYRightBottom() {
+    public void shouldNotBeInsideOnTheBorderYBottomRight() {
         // given
         final Boundary boundary = new Boundary(1, 7, 6, 2);
         final Point point = new Point(5, 8);
@@ -142,7 +142,7 @@ public class BoundaryTest {
         final String printedBoundary = boundary.toString();
 
         // then
-        assertThat(printedBoundary, is(equalTo("Boundary(upperLeft=Point(x=4, y=0), rightBottom=Point(x=6, y=3))")));
+        assertThat(printedBoundary, is(equalTo("Boundary(upperLeft=Point(x=4, y=0), bottomRight=Point(x=6, y=3))")));
     }
 
 }

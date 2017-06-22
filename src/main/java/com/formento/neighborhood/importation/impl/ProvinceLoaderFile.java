@@ -29,13 +29,13 @@ public class ProvinceLoaderFile implements ProvinceLoader {
     public Collection<Province> load() throws IOException {
         final Resource resource = new ClassPathResource("provinces.json");
         final File file = resource.getFile();
-        final Map<String, Boundary> boundaryMap = objectMapper.readValue(file, new TypeReference<Map<String, Boundary>>() {
+        final Map<String, Map<String,Boundary>> boundaryMap = objectMapper.readValue(file, new TypeReference<Map<String, Map<String,Boundary>>>() {
         });
 
         return boundaryMap.
             entrySet().
             stream().
-            map(entry -> new Province(entry.getKey(), entry.getValue())).
+            map(entry -> new Province(entry.getKey(), entry.getValue().get("boundaries"))).
             collect(Collectors.toList());
     }
 

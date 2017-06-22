@@ -74,9 +74,9 @@ class BoundaryServiceDefaultBDD {
         return this;
     }
 
-    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Integer upperLeftX, final Integer upperLeftY, final Integer rightBottomX,
-        final Integer rightBottomY) {
-        return thenShouldHaveThisBoundary(new Boundary(upperLeftX, upperLeftY, rightBottomX, rightBottomY));
+    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Integer upperLeftX, final Integer upperLeftY, final Integer bottomRightX,
+        final Integer bottomRightY) {
+        return thenShouldHaveThisBoundary(new Boundary(upperLeftX, upperLeftY, bottomRightX, bottomRightY));
     }
 
     public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Boundary boundary) {

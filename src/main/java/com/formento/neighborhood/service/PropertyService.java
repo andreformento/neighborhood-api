@@ -8,6 +8,8 @@ public interface PropertyService {
 
     Property addProperty(final Property property);
 
+    Property findById(final Long id);
+
     Collection<Property> findPropertiesInsideBoundary(final Boundary boundary);
 
 }

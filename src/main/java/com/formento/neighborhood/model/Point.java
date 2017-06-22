@@ -3,6 +3,7 @@ package com.formento.neighborhood.model;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 public class Point implements Serializable, Comparable<Point> {
 
@@ -10,7 +11,7 @@ public class Point implements Serializable, Comparable<Point> {
     private final Integer y;
 
     @ConstructorProperties({"x", "y"})
-    public Point(Integer x, Integer y) {
+    public Point(@NotNull Integer x, @NotNull Integer y) {
         this.x = x;
         this.y = y;
     }

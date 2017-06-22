@@ -3,6 +3,8 @@ package com.formento.neighborhood.model;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Province implements Serializable, Comparable<Province> {
 
@@ -10,7 +12,7 @@ public class Province implements Serializable, Comparable<Province> {
     private final Boundary boundary;
 
     @ConstructorProperties({"description", "boundary"})
-    public Province(String description, Boundary boundary) {
+    public Province(@NotEmpty String description, @NotNull Boundary boundary) {
         this.description = description;
         this.boundary = boundary;
     }

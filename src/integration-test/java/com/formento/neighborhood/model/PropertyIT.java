@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class PropertyIT {
     @Test
     public void shoudSerialize() throws JsonProcessingException {
         // given
-        final Iterable<Province> provinces = ImmutableList.<Province>builder().
+        final Collection<Province> provinces = ImmutableList.<Province>builder().
             add(new Province("Scavy", null)).
             add(new Province("Gode", null)).
             build();

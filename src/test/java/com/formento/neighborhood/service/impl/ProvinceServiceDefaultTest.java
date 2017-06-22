@@ -63,7 +63,7 @@ public class ProvinceServiceDefaultTest {
     }
 
     @Test
-    public void shouldFindPointInsideComplexBoundaryOnRightBottomBorder() {
+    public void shouldFindPointInsideComplexBoundaryOnBottomRightBorder() {
         boundaryServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(6, 5).
