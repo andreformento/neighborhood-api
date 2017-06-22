@@ -29,7 +29,7 @@ public class DatabaseInitializerIT {
 
     @Test
     public void shouldInitializePropertiesAfterStartApplication() {
-        assertThat(propertyRepository.count()).isEqualTo(8000L);
+        assertThat(propertyRepository.count()).isGreaterThanOrEqualTo(8000L);
     }
 
     @Test

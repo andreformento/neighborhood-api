@@ -38,7 +38,7 @@ public class Property implements Serializable {
     @Min(20)
     @Max(240)
     private final Integer squareMeters;
-    @NotEmpty(message = "Provinces not found on this point")
+    @NotEmpty(message = "A localização (x, y) da propriedade está fora da extensão do mapa")
     private final Collection<Province> provinces;
 
     public Property(Optional<Long> id, String title, Integer price, String description, Point point,

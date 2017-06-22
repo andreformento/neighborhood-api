@@ -66,4 +66,26 @@ public class PropertyControllerIT {
                 content("provinces", contains("Scavy"));
     }
 
+    @Test
+    public void shouldNotCreatePropertyAndValidate() {
+        final String json = "{\n"
+            + "  \"x\": 15000,\n"
+            + "  \"y\": 444,\n"
+            + "  \"title\": \"\",\n"
+            + "  \"price\": null,\n"
+            + "  \"beds\": 0,\n"
+            + "  \"baths\": 31,\n"
+            + "  \"squareMeters\": 1\n"
+            + "}";
+
+        given.
+                accept(ContentType.JSON).
+                contentType(MediaType.APPLICATION_JSON_VALUE).
+                body(json).
+            when().
+                post("/properties").
+            then().
+                statusCode(is(HttpStatus.NOT_ACCEPTABLE.value()));
+    }
+
 }
