@@ -5,15 +5,18 @@
 An API to organize neighborhood
 
 #### How to
-Test: `$ gradle test -i`
+Test: `$ gradle integrationTest -i`
 
 Build: `$ gradle build`
 
+### Run on Docker
+Create image: `$ gradle buildDocker`
+
+Run: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
+
+### APIs
 
 #### References to resolve problem
 
 - [3. Kd Trees](https://www.youtube.com/watch?v=W94M9D_yXKk)
-- [4. Interval Search Trees](https://www.youtube.com/watch?v=E-9b8k7JK6I)
-- [5. Rectangle Intersection](https://www.youtube.com/watch?v=LQ-vRetWnu4)
 - [K Dimensional Tree | Set 1 (Search and Insert)](http://www.geeksforgeeks.org/k-dimensional-tree)
-- [Graphing Calculator](https://ggbm.at/txMy3DEa)
