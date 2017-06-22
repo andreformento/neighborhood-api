@@ -11,7 +11,6 @@ import com.formento.neighborhood.service.PropertyService;
 import com.formento.neighborhood.service.ProvinceService;
 import com.formento.neighborhood.validation.PropertyValidation;
 import java.util.Collection;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,8 @@ public class PropertyServiceDefault implements PropertyService {
     private final PropertyValidation propertyValidation;
 
     @Autowired
-    public PropertyServiceDefault(final NodeFactory nodeFactory, final PropertyRepository propertyRepository, final ProvinceService provinceService, final PropertyValidation propertyValidation) {
+    public PropertyServiceDefault(final NodeFactory nodeFactory, final PropertyRepository propertyRepository, final ProvinceService provinceService,
+        PropertyValidation propertyValidation) {
         this.propertyRepository = propertyRepository;
         this.provinceService = provinceService;
         this.propertyValidation = propertyValidation;
@@ -32,10 +32,11 @@ public class PropertyServiceDefault implements PropertyService {
     }
 
     @Override
-    public Property addProperty(@Valid final Property property) {
+    public Property addProperty(final Property property) {
         final Collection<Province> provinces = provinceService.findByPoint(property.getPoint());
         final Property entity = new Property(property, provinces);
-        propertyValidation.validateBeforeInsert(entity);
+
+        propertyValidation.validateBeforeInsert(property);
 
         return root.add(propertyRepository.insert(entity)).getValue();
     }

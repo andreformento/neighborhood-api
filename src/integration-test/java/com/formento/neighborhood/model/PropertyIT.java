@@ -10,6 +10,9 @@ import com.google.common.collect.ImmutableList;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class PropertyIT {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private Validator validator;
 
     @Test
     public void shoudSerialize() throws JsonProcessingException {
@@ -96,6 +102,30 @@ public class PropertyIT {
         assertThat(result.getBeds()).isEqualTo(property.getBeds());
         assertThat(result.getBaths()).isEqualTo(property.getBaths());
         assertThat(result.getSquareMeters()).isEqualTo(property.getSquareMeters());
+    }
+
+    @Test
+    public void shouldBeValidated(){
+        // given
+        final Collection<Province> provinces = ImmutableList.<Province>builder().
+            add(new Province("Scavy", null)).
+            add(new Province("Gode", null)).
+            build();
+
+        final Property property = new Property(
+            Optional.of(789L),
+            "Imóvel código 1, com 5 quartos e 4 banheiros",
+            1250000,
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            new Point(222, 444),
+            (short) 4,
+            (short) 3,
+            210,
+            provinces);
+
+        // when
+        final Set<ConstraintViolation<Property>> validate = validator.validate(property);
+
     }
 
 }

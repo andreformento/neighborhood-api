@@ -15,18 +15,31 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Property implements Serializable {
 
+
+    @NotNull
     private final Optional<Long> id;
+    @NotEmpty
     private final String title;
+    @NotEmpty
     private final Integer price;
+    @NotEmpty
     private final String description;
+    @NotEmpty
     private final Point point;
+    @Size(min = 1, max = 5)
+    @NotEmpty
     private final Short beds;
+    @Size(min = 1, max = 4)
+    @NotEmpty
     private final Short baths;
+    @Size(min = 20, max = 240)
+    @NotEmpty
     private final Integer squareMeters;
+    @NotEmpty(message = "Provinces not found on this point")
     private final Collection<Province> provinces;
 
-    public Property(@NotNull Optional<Long> id, @NotNull String title, @NotNull Integer price, @NotNull String description, @NotNull Point point,
-        @NotNull Short beds, @NotNull Short baths, @NotNull Integer squareMeters, @NotNull Collection<Province> provinces) {
+    public Property(Optional<Long> id, String title, Integer price, String description, Point point,
+        Short beds, Short baths, Integer squareMeters, Collection<Province> provinces) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -41,13 +54,13 @@ public class Property implements Serializable {
     @JsonCreator
     public Property(
         @JsonProperty(value = "id") Optional<Long> id,
-        @NotEmpty @JsonProperty(value = "title") String title,
-        @NotEmpty @JsonProperty(value = "price") Integer price,
-        @NotEmpty @JsonProperty(value = "description") String description,
-        @NotEmpty @JsonProperty(value = "point") @JsonUnwrapped Point point,
-        @NotEmpty @Size(min = 1, max = 5) @JsonProperty(value = "beds") Short beds,
-        @NotEmpty @Size(min = 1, max = 4) @JsonProperty(value = "baths") Short baths,
-        @NotEmpty @Size(min = 20, max = 240) @JsonProperty(value = "squareMeters") Integer squareMeters) {
+        @JsonProperty(value = "title") String title,
+        @JsonProperty(value = "price") Integer price,
+        @JsonProperty(value = "description") String description,
+        @JsonProperty(value = "point") @JsonUnwrapped Point point,
+        @JsonProperty(value = "beds") Short beds,
+        @JsonProperty(value = "baths") Short baths,
+        @JsonProperty(value = "squareMeters") Integer squareMeters) {
         this(id, title, price, description, point, beds, baths, squareMeters, emptyList());
     }
 
@@ -55,7 +68,7 @@ public class Property implements Serializable {
         this(id, entity.title, entity.price, entity.description, entity.point, entity.beds, entity.baths, entity.squareMeters, entity.provinces);
     }
 
-    public Property(@NotNull Property entity, @NotEmpty(message = "Provinces not found on this point") Collection<Province> provinces) {
+    public Property(Property entity, Collection<Province> provinces) {
         this(entity.id, entity.title, entity.price, entity.description, entity.point, entity.beds, entity.baths, entity.squareMeters, provinces);
     }
 
