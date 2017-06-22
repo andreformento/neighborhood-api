@@ -1,7 +1,9 @@
 package com.formento.neighborhood.api.controller;
 
+import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Property;
 import com.formento.neighborhood.service.PropertyService;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +33,14 @@ public class PropertyController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Property create(@PathVariable("id") Long id) {
+    public Property findById(@PathVariable("id") Long id) {
         return propertyService.findById(id);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<Property> findPropertiesInsideBoundary(Integer ax, Integer ay, Integer bx, Integer by) {
+        return propertyService.findPropertiesInsideBoundary(new Boundary(ax, ay, bx, by));
     }
 
 }

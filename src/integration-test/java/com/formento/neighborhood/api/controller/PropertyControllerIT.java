@@ -16,12 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 public class PropertyControllerIT {
 
     @Autowired
@@ -55,7 +58,7 @@ public class PropertyControllerIT {
                 post("/properties").
             then().
                 statusCode(is(HttpStatus.CREATED.value())).
-                content("id", greaterThanOrEqualTo(8001)).
+                content("id", equalTo(8001)).
                 content("title", equalTo("Imóvel código 1, com 5 quartos e 4 banheiros")).
                 content("price", equalTo(1250000)).
                 content("x", equalTo(222)).
@@ -118,6 +121,17 @@ public class PropertyControllerIT {
                 get("/properties/9999999").
             then().
                 statusCode(is(HttpStatus.NOT_FOUND.value()));
+    }
+
+    @Test
+    public void shouldFindByBoundary() {
+        given.
+            accept(ContentType.JSON).
+            contentType(MediaType.APPLICATION_JSON_VALUE).
+        when().
+            get("/properties?ax=1300&ay=180&bx=1400&by=300").
+        then().
+            statusCode(is(HttpStatus.OK.value()));
     }
 
 }
