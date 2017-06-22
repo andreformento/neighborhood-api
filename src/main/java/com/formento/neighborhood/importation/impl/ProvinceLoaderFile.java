@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formento.neighborhood.importation.ProvinceLoader;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Province;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class ProvinceLoaderFile implements ProvinceLoader {
@@ -28,8 +28,7 @@ public class ProvinceLoaderFile implements ProvinceLoader {
     @Override
     public Collection<Province> load() throws IOException {
         final Resource resource = new ClassPathResource("provinces.json");
-        final File file = resource.getFile();
-        final Map<String, Map<String,Boundary>> boundaryMap = objectMapper.readValue(file, new TypeReference<Map<String, Map<String,Boundary>>>() {
+        final Map<String, Map<String,Boundary>> boundaryMap = objectMapper.readValue(resource.getInputStream(), new TypeReference<Map<String, Map<String,Boundary>>>() {
         });
 
         return boundaryMap.

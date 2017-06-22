@@ -7,17 +7,41 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
+
+group = 'formento'
 
 apply plugin: 'java'
 //apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
 
 jar {
     baseName = 'neighborhood-api'
-    version = '3.0.0-SNAPSHOT'
+    version = '3.0.0-SNAPSHOT' //${project.version}
+}
+
+task copyJar(type: Copy) {
+    from        "build/resources/main/properties.json"
+    into        'build/docker'
+    from        "build/resources/main/provinces.json"
+    into        'build/docker'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    dependsOn copyJar
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
 }
 
 sourceCompatibility = 1.8
@@ -78,13 +102,3 @@ task jacocoIntegrationTestReport(type: JacocoReport){
     sourceSets sourceSets.main
     executionData integrationTest
 }
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled false
-    }
-    executionData(test, integrationTest)
-}
-
-tasks.build.dependsOn(jacocoTestReport)
