@@ -29,7 +29,7 @@ public class NodeFactoryDefaultTest {
     private NodeFactory nodeFactory = new NodeFactoryDefault();
 
     private Property mapFromPoint(Point point) {
-        return new Property(Optional.empty(), "title", 123, "description", point, (short) 10, (short) 11, 321);
+        return new Property(Optional.empty(), "title", 123, "description", point,  10,  11, 321);
     }
 
     /*

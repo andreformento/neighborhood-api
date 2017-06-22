@@ -1,19 +1,21 @@
 package com.formento.neighborhood.model;
 
+import static java.util.Collections.emptyList;
 import static java.util.Optional.empty;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.formento.neighborhood.validation.PropertyValidation;
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import javax.validation.ConstraintViolationException;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,11 +25,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class PropertyIT {
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
-    private Validator validator;
+    private PropertyValidation propertyValidation;
 
     @Test
     public void shoudSerialize() throws JsonProcessingException {
@@ -43,8 +48,8 @@ public class PropertyIT {
             1250000,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             new Point(222, 444),
-            (short) 4,
-            (short) 3,
+            4,
+            3,
             210,
             provinces);
         final String json = "{\n"
@@ -76,8 +81,8 @@ public class PropertyIT {
             1250000,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             new Point(222, 444),
-            (short) 4,
-            (short) 3,
+            4,
+            3,
             210);
         final String json = "{\n"
             + "  \"x\": 222,\n"
@@ -105,7 +110,7 @@ public class PropertyIT {
     }
 
     @Test
-    public void shouldBeValidated(){
+    public void shouldBeValidated() {
         // given
         final Collection<Province> provinces = ImmutableList.<Province>builder().
             add(new Province("Scavy", null)).
@@ -113,19 +118,39 @@ public class PropertyIT {
             build();
 
         final Property property = new Property(
-            Optional.of(789L),
+            empty(),
             "Imóvel código 1, com 5 quartos e 4 banheiros",
             1250000,
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             new Point(222, 444),
-            (short) 4,
-            (short) 3,
+            4,
+            3,
             210,
             provinces);
 
         // when
-        final Set<ConstraintViolation<Property>> validate = validator.validate(property);
+        propertyValidation.validateBeforeInsert(property);
+    }
 
+    @Test
+    public void shouldNotBeValidated() {
+        // given
+        final Property property = new Property(
+            empty(),
+            null,
+            0,
+            "",
+            new Point(0, null),
+            10,
+            0,
+            5,
+            emptyList());
+
+        // expected exception
+        expectedException.expect(ConstraintViolationException.class);
+
+        // when
+        propertyValidation.validateBeforeInsert(property);
     }
 
 }

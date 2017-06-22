@@ -9,37 +9,36 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Optional;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Property implements Serializable {
 
-
-    @NotNull
     private final Optional<Long> id;
     @NotEmpty
     private final String title;
-    @NotEmpty
+    @Min(0)
     private final Integer price;
     @NotEmpty
     private final String description;
-    @NotEmpty
+    @NotNull
     private final Point point;
-    @Size(min = 1, max = 5)
-    @NotEmpty
-    private final Short beds;
-    @Size(min = 1, max = 4)
-    @NotEmpty
-    private final Short baths;
-    @Size(min = 20, max = 240)
-    @NotEmpty
+    @Min(1)
+    @Max(5)
+    private final Integer beds;
+    @Min(1)
+    @Max(4)
+    private final Integer baths;
+    @Min(20)
+    @Max(240)
     private final Integer squareMeters;
     @NotEmpty(message = "Provinces not found on this point")
     private final Collection<Province> provinces;
 
     public Property(Optional<Long> id, String title, Integer price, String description, Point point,
-        Short beds, Short baths, Integer squareMeters, Collection<Province> provinces) {
+        Integer beds, Integer baths, Integer squareMeters, Collection<Province> provinces) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -58,8 +57,8 @@ public class Property implements Serializable {
         @JsonProperty(value = "price") Integer price,
         @JsonProperty(value = "description") String description,
         @JsonProperty(value = "point") @JsonUnwrapped Point point,
-        @JsonProperty(value = "beds") Short beds,
-        @JsonProperty(value = "baths") Short baths,
+        @JsonProperty(value = "beds") Integer beds,
+        @JsonProperty(value = "baths") Integer baths,
         @JsonProperty(value = "squareMeters") Integer squareMeters) {
         this(id, title, price, description, point, beds, baths, squareMeters, emptyList());
     }
@@ -93,11 +92,11 @@ public class Property implements Serializable {
         return point;
     }
 
-    public Short getBeds() {
+    public Integer getBeds() {
         return beds;
     }
 
-    public Short getBaths() {
+    public Integer getBaths() {
         return baths;
     }
 

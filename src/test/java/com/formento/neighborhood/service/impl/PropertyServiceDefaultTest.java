@@ -54,7 +54,7 @@ public class PropertyServiceDefaultTest {
         // given
         final long id = 1L;
         final Optional<Property> property = Optional
-            .of(new Property(Optional.of(id), "title", 123, "description", new Point(1, 2), (short) 10, (short) 11, 321));
+            .of(new Property(Optional.of(id), "title", 123, "description", new Point(1, 2),  10,  11, 321));
 
         // when
         when(propertyRepository.findOne(id)).thenReturn(property);
@@ -80,7 +80,7 @@ public class PropertyServiceDefaultTest {
     @Test
     public void shouldInsertProperty() {
         // given
-        final Property property = new Property(Optional.of(1L), "title", 123, "description", new Point(1, 2), (short) 10, (short) 11, 321);
+        final Property property = new Property(Optional.of(1L), "title", 123, "description", new Point(1, 2),  10,  11, 321);
 
         // when
         when(provinceService.findByPoint(property.getPoint())).thenReturn(emptyList());

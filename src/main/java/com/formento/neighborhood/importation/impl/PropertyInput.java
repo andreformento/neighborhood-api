@@ -14,12 +14,12 @@ class PropertyInput implements Serializable {
     private final String description;
     private final Integer lat;
     private final Integer longi;
-    private final Short beds;
-    private final Short baths;
+    private final Integer beds;
+    private final Integer baths;
     private final Integer squareMeters;
 
     @ConstructorProperties({"id", "title", "price", "description", "lat", "long", "beds", "baths", "squareMeters"})
-    PropertyInput(Long id, String title, Integer price, String description, Integer lat, Integer longi, Short beds, Short baths,
+    PropertyInput(Long id, String title, Integer price, String description, Integer lat, Integer longi, Integer beds, Integer baths,
         Integer squareMeters) {
         this.id = id;
         this.title = title;
