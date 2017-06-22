@@ -1,7 +1,7 @@
 package com.formento.neighborhood.component.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.infra.NeighborhoodException;
+import com.formento.neighborhood.exception.NeighborhoodException;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Property;
 import com.formento.neighborhood.model.PropertyComparator;

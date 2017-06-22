@@ -1,4 +1,4 @@
-package com.formento.neighborhood.infra;
+package com.formento.neighborhood.exception;
 
 public class NeighborhoodValidationException extends NeighborhoodException {
 

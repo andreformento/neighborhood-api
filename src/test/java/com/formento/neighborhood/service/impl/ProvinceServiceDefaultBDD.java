@@ -3,6 +3,7 @@ package com.formento.neighborhood.service.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import com.formento.neighborhood.component.ProvinceFinder;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.Province;

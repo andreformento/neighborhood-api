@@ -1,13 +1,13 @@
-package com.formento.neighborhood.infra;
+package com.formento.neighborhood.exception;
 
 import java.io.Serializable;
 import java.util.Map;
 
-class ValidationResult implements Serializable {
+class ErrorResult implements Serializable {
 
     private final Map<String, String> errors;
 
-    ValidationResult(Map<String, String> errors) {
+    ErrorResult(Map<String, String> errors) {
         this.errors = errors;
     }
 

@@ -1,5 +1,9 @@
 package com.formento.neighborhood.service.impl;
 
+import static org.mockito.Answers.CALLS_REAL_METHODS;
+
+import com.formento.neighborhood.component.ProvinceFinder;
+import com.formento.neighborhood.component.impl.ProvinceFinderDefault;
 import com.formento.neighborhood.repository.ProvinceRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,15 +16,17 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class ProvinceServiceDefaultTest {
 
     @InjectMocks
-    private ProvinceServiceDefault boundaryService;
+    private ProvinceServiceDefault provinceServiceDefault;
     @Mock
     private ProvinceRepository provinceRepository;
+    @Mock(answer = CALLS_REAL_METHODS)
+    private ProvinceFinderDefault provinceFinder;
 
     private ProvinceServiceDefaultBDD provinceServiceDefaultBDD;
 
     @Before
     public void init() {
-        provinceServiceDefaultBDD = new ProvinceServiceDefaultBDD(boundaryService, provinceRepository);
+        provinceServiceDefaultBDD = new ProvinceServiceDefaultBDD(provinceServiceDefault, provinceRepository);
     }
 
     @Test

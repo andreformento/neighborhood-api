@@ -88,4 +88,25 @@ public class PropertyControllerIT {
                 statusCode(is(HttpStatus.NOT_ACCEPTABLE.value()));
     }
 
+    @Test
+    public void shouldFindById() {
+        given.
+                accept(ContentType.JSON).
+                contentType(MediaType.APPLICATION_JSON_VALUE).
+            when().
+                get("/properties/665").
+            then().
+                statusCode(is(HttpStatus.OK.value())).
+                content("id", equalTo(665)).
+                content("title", equalTo("Imóvel código 665, com 5 quartos e 4 banheiros.")).
+                content("price", equalTo(1779000)).
+                content("description", equalTo("Ex laborum sunt eiusmod esse commodo. Nulla laboris in adipisicing aliqua Lorem est laboris nulla dolore esse nostrud non deserunt.")).
+                content("x", equalTo(1317)).
+                content("y", equalTo(182)).
+                content("beds", equalTo(5)).
+                content("baths", equalTo(4)).
+                content("squareMeters", equalTo(175)).
+                content("provinces", contains("Nova"));
+    }
+
 }

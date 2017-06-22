@@ -4,7 +4,7 @@ import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.infra.NeighborhoodException;
+import com.formento.neighborhood.exception.NeighborhoodException;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;

@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.infra.NeighborhoodNotFoundException;
+import com.formento.neighborhood.exception.NeighborhoodNotFoundException;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Point;
 import com.formento.neighborhood.model.Property;

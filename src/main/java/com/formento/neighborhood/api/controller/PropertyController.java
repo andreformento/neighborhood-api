@@ -4,6 +4,8 @@ import com.formento.neighborhood.model.Property;
 import com.formento.neighborhood.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,12 @@ public class PropertyController {
     @ResponseStatus(HttpStatus.CREATED)
     public Property create(@RequestBody final Property property) {
         return propertyService.create(property);
+    }
+
+    @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Property create(@PathVariable("id") Long id) {
+        return propertyService.findById(id);
     }
 
 }

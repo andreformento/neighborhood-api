@@ -1,7 +1,7 @@
 package com.formento.neighborhood.service.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.infra.NeighborhoodNotFoundException;
+import com.formento.neighborhood.exception.NeighborhoodNotFoundException;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Node;
 import com.formento.neighborhood.model.Property;
