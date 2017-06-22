@@ -42,39 +42,26 @@ public class PropertyServiceIT {
 
         // when
         final Collection<Property> properties = propertyService.findPropertiesInsideBoundary(boundary);
-//
-        System.out.println("total: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 70).
-                filter(p -> p.getPoint().getX() <= 70).
-                filter(p -> p.getPoint().getY() <= 95).
-                filter(p -> p.getPoint().getY() >= 0).count());
+        final Integer countEasyWay = easyWay(boundary);
 
         // then
         assertThat(properties).isNotNull();
+        assertThat(countEasyWay).isEqualTo(3);
         assertThat(properties.size()).isEqualTo(3);
     }
 
     @Test
-    public void shouldFindSpecificPointsInter() {
+    public void shouldFindSpecificPointsIntersection() {
         // given
         final Boundary boundary = new Boundary(400, 1000, 600, 500);
-//        final Boundary boundary = new Boundary(70, 95, 70, 0);
 
         // when
         final Collection<Property> properties = propertyService.findPropertiesInsideBoundary(boundary);
-//
-        System.out.println("total: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 400).
-                filter(p -> p.getPoint().getX() <= 600).
-                filter(p -> p.getPoint().getY() <= 1000).
-                filter(p -> p.getPoint().getY() >= 500).count());
+        final Integer countEasyWay = easyWay(boundary);
 
         // then
         assertThat(properties).isNotNull();
+        assertThat(countEasyWay).isEqualTo(541);
         assertThat(properties.size()).isEqualTo(541);
     }
 
@@ -96,63 +83,30 @@ public class PropertyServiceIT {
         final int groolaSize = propertyService.findPropertiesInsideBoundary(groola).size();
         final int novaSize = propertyService.findPropertiesInsideBoundary(nova).size();
 
-        System.out.println("total gode: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 0).
-                filter(p -> p.getPoint().getX() <= 600).
-                filter(p -> p.getPoint().getY() <= 1000).
-                filter(p -> p.getPoint().getY() >= 500).count()
-                );
-        System.out.println("total ruja: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 400).
-                filter(p -> p.getPoint().getX() <= 1100).
-                filter(p -> p.getPoint().getY() <= 1000).
-                filter(p -> p.getPoint().getY() >= 500).count()
-                );
-        System.out.println("total jaby: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 1100).
-                filter(p -> p.getPoint().getX() <= 1400).
-                filter(p -> p.getPoint().getY() <= 1000).
-                filter(p -> p.getPoint().getY() >= 500).count()
-                );
-        System.out.println("total scavy: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 0).
-                filter(p -> p.getPoint().getX() <= 600).
-                filter(p -> p.getPoint().getY() <= 500).
-                filter(p -> p.getPoint().getY() >= 0).count()
-                );
-
-        System.out.println("total groola: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 600).
-                filter(p -> p.getPoint().getX() <= 800).
-                filter(p -> p.getPoint().getY() <= 500).
-                filter(p -> p.getPoint().getY() >= 0).count()
-                );
-        System.out.println("total nova: " + propertyRepository.
-                findAll().
-                stream().
-                filter(p -> p.getPoint().getX() >= 800).
-                filter(p -> p.getPoint().getX() <= 1400).
-                filter(p -> p.getPoint().getY() <= 500).
-                filter(p -> p.getPoint().getY() >= 0).count()
-                );
-
         // then
-        assertThat(godeSize).isEqualTo(1746);
-        assertThat(rujaSize).isEqualTo(1969);
-        assertThat(jabySize).isEqualTo(884);
-        assertThat(scavySize).isEqualTo(1728);
-        assertThat(groolaSize).isEqualTo(577);
-        assertThat(novaSize).isEqualTo(1647);
+        assertThat(godeSize).isEqualTo(easyWay(gode)).isEqualTo(1746);
+        assertThat(rujaSize).isEqualTo(easyWay(ruja)).isEqualTo(1969);
+        assertThat(jabySize).isEqualTo(easyWay(jaby)).isEqualTo(884);
+        assertThat(scavySize).isEqualTo(easyWay(scavy)).isEqualTo(1728);
+        assertThat(groolaSize).isEqualTo(easyWay(groola)).isEqualTo(577);
+        assertThat(novaSize).isEqualTo(easyWay(nova)).isEqualTo(1647);
+    }
+
+    // another easy way (without optimization of kdtree to count points
+    private Integer easyWay(Boundary boundary) {
+        return easyWay(boundary.getUpperLeft().getX(), boundary.getUpperLeft().getY(), boundary.getBottomRight().getX(), boundary.getBottomRight().getY());
+    }
+
+    private Integer easyWay(final Integer upperLeftX, final Integer upperLeftY, final Integer bottomRightX, final Integer bottomRightY) {
+        final Long count = propertyRepository.
+                findAll().
+                stream().
+                filter(p -> p.getPoint().getX() >= upperLeftX).
+                filter(p -> p.getPoint().getY() <= upperLeftY).
+                filter(p -> p.getPoint().getX() <= bottomRightX).
+                filter(p -> p.getPoint().getY() >= bottomRightY).
+                count();
+        return count.intValue();
     }
 
 }
