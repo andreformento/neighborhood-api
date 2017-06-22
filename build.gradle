@@ -26,13 +26,6 @@ repositories {
     mavenCentral()
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled false
-    }
-}
-
 //Configures the compile and runtime configurations for our integration tests
 //and includes the dependencies of the test task.
 configurations {
@@ -74,7 +67,6 @@ task integrationTest(type: Test, dependsOn: cleanTest) {
 }
 
 check.dependsOn jacocoTestReport
-check.dependsOn integrationTest
 
 integrationTest.mustRunAfter test
 
@@ -87,21 +79,12 @@ task jacocoIntegrationTestReport(type: JacocoReport){
     executionData integrationTest
 }
 
-// codecove
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
+jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled false
-        csv.enabled false
     }
+    executionData(test, integrationTest)
 }
 
-task jacocoMerge(type: JacocoMerge) {
-    executionData test, integrationTest
-}
+tasks.build.dependsOn(jacocoTestReport)
