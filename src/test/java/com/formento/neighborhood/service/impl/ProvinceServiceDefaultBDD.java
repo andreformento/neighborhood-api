@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class BoundaryServiceDefaultBDD {
+class ProvinceServiceDefaultBDD {
 
     private final ProvinceService provinceService;
     private final ProvinceRepository provinceRepository;
@@ -21,12 +21,12 @@ class BoundaryServiceDefaultBDD {
     private Point point;
     private Collection<Province> provincesByPoint;
 
-    public BoundaryServiceDefaultBDD(ProvinceService provinceService, ProvinceRepository provinceRepository) {
+    public ProvinceServiceDefaultBDD(ProvinceService provinceService, ProvinceRepository provinceRepository) {
         this.provinceService = provinceService;
         this.provinceRepository = provinceRepository;
     }
 
-    public BoundaryServiceDefaultBDD givenAValidRegion(final Collection<Boundary> boundaries) {
+    public ProvinceServiceDefaultBDD givenAValidRegion(final Collection<Boundary> boundaries) {
         final List<Province> provinces = boundaries.
             stream().
             map(o -> new Province("description", o)).
@@ -34,19 +34,19 @@ class BoundaryServiceDefaultBDD {
         return givenAValidRegionProvince(provinces);
     }
 
-    public BoundaryServiceDefaultBDD givenAValidRegionProvince(final Collection<Province> provinces) {
+    public ProvinceServiceDefaultBDD givenAValidRegionProvince(final Collection<Province> provinces) {
         when(provinceRepository.findAll()).thenReturn(provinces);
         return this;
     }
 
-    public BoundaryServiceDefaultBDD givenSimpleRegion() {
+    public ProvinceServiceDefaultBDD givenSimpleRegion() {
         return givenAValidRegion(ImmutableList.<Boundary>builder().
             add(new Boundary(0, 6, 5, 1)).
             build()
         );
     }
 
-    public BoundaryServiceDefaultBDD givenComplexRegion() {
+    public ProvinceServiceDefaultBDD givenComplexRegion() {
         return givenAValidRegion(ImmutableList.<Boundary>builder().
             add(new Boundary(0, 3, 2, 0)).
             add(new Boundary(0, 5, 2, 3)).
@@ -58,28 +58,28 @@ class BoundaryServiceDefaultBDD {
         );
     }
 
-    public BoundaryServiceDefaultBDD andAPoint(final Integer x, final Integer y) {
+    public ProvinceServiceDefaultBDD andAPoint(final Integer x, final Integer y) {
         point = new Point(x, y);
         return this;
     }
 
-    public BoundaryServiceDefaultBDD whenGetBoundariesByPoint() {
+    public ProvinceServiceDefaultBDD whenGetBoundariesByPoint() {
         provincesByPoint = provinceService.findByPoint(point);
         return this;
     }
 
-    public BoundaryServiceDefaultBDD thenShouldBeExistExactlyNBoundaries(final Integer quantityOfBoundaries) {
+    public ProvinceServiceDefaultBDD thenShouldBeExistExactlyNBoundaries(final Integer quantityOfBoundaries) {
         assertThat(provincesByPoint).isNotNull();
         assertThat(provincesByPoint).hasSize(quantityOfBoundaries);
         return this;
     }
 
-    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Integer upperLeftX, final Integer upperLeftY, final Integer bottomRightX,
+    public ProvinceServiceDefaultBDD thenShouldHaveThisBoundary(final Integer upperLeftX, final Integer upperLeftY, final Integer bottomRightX,
         final Integer bottomRightY) {
         return thenShouldHaveThisBoundary(new Boundary(upperLeftX, upperLeftY, bottomRightX, bottomRightY));
     }
 
-    public BoundaryServiceDefaultBDD thenShouldHaveThisBoundary(final Boundary boundary) {
+    public ProvinceServiceDefaultBDD thenShouldHaveThisBoundary(final Boundary boundary) {
         assertThat(provincesByPoint.stream().map(Province::getBoundary).findAny()).isNotNull();
         return this;
     }

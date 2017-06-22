@@ -16,16 +16,16 @@ public class ProvinceServiceDefaultTest {
     @Mock
     private ProvinceRepository provinceRepository;
 
-    private BoundaryServiceDefaultBDD boundaryServiceDefaultBDD;
+    private ProvinceServiceDefaultBDD provinceServiceDefaultBDD;
 
     @Before
     public void init() {
-        boundaryServiceDefaultBDD = new BoundaryServiceDefaultBDD(boundaryService, provinceRepository);
+        provinceServiceDefaultBDD = new ProvinceServiceDefaultBDD(boundaryService, provinceRepository);
     }
 
     @Test
     public void shouldFindPointInsideSimpleBoundary() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenSimpleRegion().
             andAPoint(2, 3).
             whenGetBoundariesByPoint().
@@ -35,7 +35,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFindPointInsideComplexBoundary() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(5, 2).
             whenGetBoundariesByPoint().whenGetBoundariesByPoint().
@@ -45,7 +45,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFindPointInsideComplexBoundaryOnUpperLeftBorder() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(0, 0).
             whenGetBoundariesByPoint().whenGetBoundariesByPoint().
@@ -55,7 +55,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldNotFindPointOutsideBoundary() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(6, 6).
             whenGetBoundariesByPoint().
@@ -64,7 +64,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFindPointInsideComplexBoundaryOnBottomRightBorder() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(6, 5).
             whenGetBoundariesByPoint().
@@ -74,7 +74,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFind2PointsInsideComplexBoundary() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(3, 1).
             whenGetBoundariesByPoint().
@@ -85,7 +85,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFind2PointsInsideComplexBoundaryOnBorder() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(1, 4).
             whenGetBoundariesByPoint().
@@ -96,7 +96,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFind3PointsInsideComplexBoundary() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(4, 3).
             whenGetBoundariesByPoint().
@@ -109,7 +109,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFind5PointsInsideMultiBoundaries() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(2, 3).
             whenGetBoundariesByPoint().
@@ -123,7 +123,7 @@ public class ProvinceServiceDefaultTest {
 
     @Test
     public void shouldFind4PointsInsideMultiBoundaries() {
-        boundaryServiceDefaultBDD.
+        provinceServiceDefaultBDD.
             givenComplexRegion().
             andAPoint(3, 3).
             whenGetBoundariesByPoint().
