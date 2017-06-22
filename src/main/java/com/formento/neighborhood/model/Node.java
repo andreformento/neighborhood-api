@@ -1,6 +1,7 @@
 package com.formento.neighborhood.model;
 
 import com.google.common.collect.ImmutableList;
+
 import java.util.Collection;
 import java.util.Optional;
 
@@ -60,33 +61,33 @@ public class Node {
     public Collection<Property> findPropertiesInsideBoundary(final Boundary boundary) {
         final ImmutableList.Builder<Property> builder = ImmutableList.builder();
 
-        findPropertiesInsideBoundary(boundary, builder, true);
+        findPropertiesInsideBoundary(boundary, builder);
 
         return builder.build();
     }
 
-    private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder,
-        final boolean continueIfNotFound) {
-        final boolean goToTheUpperLeft;
-        final boolean goToTheBottomRight;
-        final boolean nextContinueIfNotFound;
+    private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder) {
+        final boolean canGoToTheLeft;
+        final boolean canGoToTheRight;
         if (boundary.containsPoint(value.getPoint())) {
             builder.add(value);
-            goToTheUpperLeft = true;
-            goToTheBottomRight = true;
-            nextContinueIfNotFound = false;
+            canGoToTheLeft = true;
+            canGoToTheRight = true;
+        } else if (propertyComparator.compare(value.getPoint(), boundary.getUpperLeft()) >= 0 &&
+                propertyComparator.compare(value.getPoint(), boundary.getBottomRight()) <= 0) {
+            canGoToTheLeft = true;
+            canGoToTheRight = true;
         } else {
-            nextContinueIfNotFound = true;//continueIfNotFound;
-            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(value.getPoint(), boundary.getUpperLeft()) >= 0;
-            goToTheBottomRight = nextContinueIfNotFound && propertyComparator.compare(value.getPoint(), boundary.getBottomRight()) <= 0;
+            canGoToTheLeft = propertyComparator.compare(value.getPoint(), boundary.getBottomRight()) > 0;
+            canGoToTheRight = propertyComparator.compare(value.getPoint(), boundary.getUpperLeft()) < 0;
         }
 
         left.
-            filter(node -> goToTheUpperLeft).
-            ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
+                filter(node -> canGoToTheLeft).
+                ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder));
         right.
-            filter(node -> goToTheBottomRight).
-            ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder, nextContinueIfNotFound));
+                filter(node -> canGoToTheRight).
+                ifPresent(node -> node.findPropertiesInsideBoundary(boundary, builder));
     }
 
 }

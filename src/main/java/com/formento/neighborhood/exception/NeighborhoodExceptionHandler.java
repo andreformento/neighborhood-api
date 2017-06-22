@@ -2,8 +2,6 @@ package com.formento.neighborhood.exception;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,6 +9,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class NeighborhoodExceptionHandler {
@@ -36,7 +37,7 @@ public class NeighborhoodExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResult constraintViolation(ConstraintViolationException e) {
         LOGGER.error("Constraint validation failed: {}", e);
 

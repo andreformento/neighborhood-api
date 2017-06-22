@@ -1,13 +1,7 @@
 package com.formento.neighborhood.model;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.formento.neighborhood.component.impl.NodeFactoryDefault;
 import com.google.common.collect.ImmutableList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +9,13 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NodeTest {
@@ -38,16 +39,16 @@ public class NodeTest {
     @Before
     public void init() {
         final List<Property> properties = ImmutableList.<Point>builder().
-            add(new Point(3, 6)).
-            add(new Point(17, 15)).
-            add(new Point(13, 15)).
-            add(new Point(9, 1)).
-            add(new Point(2, 7)).
-            add(new Point(10, 19)).
-            build().
-            stream().
-            map(this::mapFromPoint).
-            collect(Collectors.toList());
+                add(new Point(3, 6)).
+                add(new Point(17, 15)).
+                add(new Point(13, 15)).
+                add(new Point(9, 1)).
+                add(new Point(2, 7)).
+                add(new Point(10, 19)).
+                build().
+                stream().
+                map(this::mapFromPoint).
+                collect(Collectors.toList());
 
         // when
         root = nodeFactory.createRoot(properties);
@@ -69,11 +70,11 @@ public class NodeTest {
 
         // then
         assertThat(root.getRight()).
-            map(Node::getRight).
-            map(Optional::get).
-            map(Node::getValue).
-            map(Property::getPoint).
-            hasValue(point_11_16);
+                map(Node::getRight).
+                map(Optional::get).
+                map(Node::getValue).
+                map(Property::getPoint).
+                hasValue(point_11_16);
     }
 
     @Test
@@ -90,6 +91,41 @@ public class NodeTest {
 
         // then
         assertThat(points).containsExactlyInAnyOrder(point_10_19, point_13_15, point_17_15);
+    }
+
+    @Test
+    public void shouldFindPointsInsideBoundaryValidatingComplexWay() {
+        // given
+        final Point point_3_5 = new Point(3, 5);
+        final Point point_7_2 = new Point(7, 2);
+        final Point point_6_3 = new Point(6, 3);
+        final Point point_7_4 = new Point(7, 4);
+
+        final List<Property> properties = ImmutableList.<Point>builder().
+                add(new Point(1, 1)).
+                add(new Point(2, 2)).
+                add(new Point(2, 4)).
+                add(point_3_5).
+                add(new Point(6, 1)).
+                add(point_6_3).
+                add(new Point(6, 6)).
+                add(point_7_2).
+                add(point_7_4).
+                add(new Point(8, 3)).
+                build().
+                stream().
+                map(this::mapFromPoint).
+                collect(Collectors.toList());
+        final Boundary boundary = new Boundary(point_3_5, point_7_2);
+
+        // when
+        root = nodeFactory.createRoot(properties);
+
+        // when
+        final Collection<Point> points = root.findPropertiesInsideBoundary(boundary).stream().map(Property::getPoint).collect(Collectors.toList());
+
+        // then
+        assertThat(points).hasSize(4).containsExactlyInAnyOrder(point_3_5, point_7_2, point_6_3, point_7_4);
     }
 
     @Test
