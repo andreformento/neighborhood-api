@@ -1,9 +1,11 @@
 package com.formento.neighborhood.api.controller;
 
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-import com.formento.neighborhood.model.Property;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
@@ -46,14 +48,22 @@ public class PropertyControllerIT {
             + "}";
 
         given.
-            accept(ContentType.JSON).
-            contentType(MediaType.APPLICATION_JSON_VALUE).
-            body(json).
-        when().
-            post("/properties").
-        then().
-            statusCode(is(HttpStatus.CREATED.value())).
-            extract().body().as(Property.class);
+                accept(ContentType.JSON).
+                contentType(MediaType.APPLICATION_JSON_VALUE).
+                body(json).
+            when().
+                post("/properties").
+            then().
+                statusCode(is(HttpStatus.CREATED.value())).
+                content("id", greaterThanOrEqualTo(8001)).
+                content("title", equalTo("Imóvel código 1, com 5 quartos e 4 banheiros")).
+                content("price", equalTo(1250000)).
+                content("x", equalTo(222)).
+                content("y", equalTo(444)).
+                content("beds", equalTo(4)).
+                content("baths", equalTo(3)).
+                content("squareMeters", equalTo(210)).
+                content("provinces", contains("Scavy"));
     }
 
 }

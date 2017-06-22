@@ -1,7 +1,5 @@
 package com.formento.neighborhood.repository.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.formento.neighborhood.model.Property;
 import com.formento.neighborhood.repository.PropertyRepository;
 import java.util.Collection;
@@ -22,7 +20,7 @@ public class PropertyRepositoryDefault implements PropertyRepository {
             mapToLong(property -> property.getId().filter(id -> id > 0L).orElse(0L)).
             max().
             orElse(0);
-        this.idGenerator = new AtomicLong(lastId + 1);
+        this.idGenerator = new AtomicLong(lastId);
 
         this.properties = properties.
             stream().
@@ -57,11 +55,11 @@ public class PropertyRepositoryDefault implements PropertyRepository {
 
     @Override
     public Property insert(Property entity) {
-        checkNotNull(entity);
+        final Long id = idGenerator.incrementAndGet();
 
-        final long id = idGenerator.getAndIncrement();
-
-        return properties.put(id, new Property(Optional.of(id), entity));
+        final Property property = new Property(Optional.of(id), entity);
+        properties.put(id, property);
+        return property;
     }
 
 }

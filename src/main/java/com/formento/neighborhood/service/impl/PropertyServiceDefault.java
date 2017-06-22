@@ -38,7 +38,8 @@ public class PropertyServiceDefault implements PropertyService {
 
         propertyValidation.validateBeforeInsert(entity);
 
-        return root.add(propertyRepository.insert(entity)).getValue();
+        final Node add = root.add(propertyRepository.insert(entity));
+        return add.getValue();
     }
 
     @Override
