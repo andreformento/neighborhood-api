@@ -1,5 +1,6 @@
 package com.formento.neighborhood.api.controller;
 
+import com.formento.neighborhood.api.mapper.PropertiesMapper;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Property;
 import com.formento.neighborhood.service.PropertyService;
@@ -39,8 +40,8 @@ public class PropertyController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Collection<Property> findPropertiesInsideBoundary(Integer ax, Integer ay, Integer bx, Integer by) {
-        return propertyService.findPropertiesInsideBoundary(new Boundary(ax, ay, bx, by));
+    public PropertiesMapper findPropertiesInsideBoundary(Integer ax, Integer ay, Integer bx, Integer by) {
+        return new PropertiesMapper(propertyService.findPropertiesInsideBoundary(new Boundary(ax, ay, bx, by)));
     }
 
 }

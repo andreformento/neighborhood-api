@@ -76,9 +76,9 @@ public class Node {
             goToTheBottomRight = true;
             nextContinueIfNotFound = false;
         } else {
-            nextContinueIfNotFound = continueIfNotFound;
-            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(boundary.getUpperLeft(), value.getPoint()) < 0;
-            goToTheBottomRight = nextContinueIfNotFound && propertyComparator.compare(boundary.getBottomRight(), value.getPoint()) > 0;
+            nextContinueIfNotFound = true;//continueIfNotFound;
+            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(value.getPoint(), boundary.getUpperLeft()) >= 0;
+            goToTheBottomRight = nextContinueIfNotFound && propertyComparator.compare(value.getPoint(), boundary.getBottomRight()) <= 0;
         }
 
         left.
