@@ -66,7 +66,7 @@ sourceSets {
     }
 }
 
-task integrationTest(type: Test) {
+task integrationTest(type: Test, dependsOn: cleanTest) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
