@@ -1,8 +1,6 @@
 package com.formento.neighborhood.model;
 
-import com.formento.neighborhood.validation.DuplicatedPointValidator;
 import com.google.common.collect.ImmutableList;
-
 import java.util.Collection;
 import java.util.Optional;
 
@@ -37,8 +35,6 @@ public class Node {
     }
 
     public Node add(final Property point) {
-        new DuplicatedPropertyValidator(value).validate(point);
-
         final Boolean isLeftWay = propertyComparator.compare(point, value) < 0;
         final Optional<Node> nextNode = isLeftWay ? left : right;
 
@@ -69,7 +65,8 @@ public class Node {
         return builder.build();
     }
 
-    private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder, final boolean continueIfNotFound) {
+    private void findPropertiesInsideBoundary(final Boundary boundary, final ImmutableList.Builder<Property> builder,
+        final boolean continueIfNotFound) {
         final boolean goToTheUpperLeft;
         final boolean goToTheRightBottom;
         final boolean nextContinueIfNotFound;
@@ -80,8 +77,8 @@ public class Node {
             nextContinueIfNotFound = false;
         } else {
             nextContinueIfNotFound = continueIfNotFound;
-            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(boundary.getUpperLeft(), value) < 0;
-            goToTheRightBottom = nextContinueIfNotFound && propertyComparator.compare(boundary.getRightBottom(), value) > 0;
+            goToTheUpperLeft = nextContinueIfNotFound && propertyComparator.compare(boundary.getUpperLeft(), value.getPoint()) < 0;
+            goToTheRightBottom = nextContinueIfNotFound && propertyComparator.compare(boundary.getRightBottom(), value.getPoint()) > 0;
         }
 
         left.

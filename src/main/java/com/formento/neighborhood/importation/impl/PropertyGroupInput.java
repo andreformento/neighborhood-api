@@ -1,7 +1,6 @@
 package com.formento.neighborhood.importation.impl;
 
 import com.formento.neighborhood.model.Property;
-
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.util.Collection;
@@ -18,11 +17,11 @@ class PropertyGroupInput implements Serializable {
         this.properties = properties;
     }
 
-    Collection<Property> generateProperties(){
+    Collection<Property> generateProperties() {
         return properties.
-                stream().
-                map(PropertyInput::generateProperty).
-                collect(Collectors.toList());
+            stream().
+            map(PropertyInput::generateProperty).
+            collect(Collectors.toList());
     }
 
 }

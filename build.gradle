@@ -11,7 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'findbugs'
+//apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 

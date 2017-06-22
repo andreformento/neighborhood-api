@@ -1,15 +1,14 @@
 package com.formento.neighborhood.model;
 
+import static java.util.Collections.emptyList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Optional;
-
-import static java.util.Collections.emptyList;
+import javax.validation.constraints.NotNull;
 
 public class Property implements Serializable {
 
@@ -24,7 +23,7 @@ public class Property implements Serializable {
     private final Iterable<Province> provinces;
 
     public Property(@NotNull Optional<Long> id, @NotNull String title, @NotNull Integer price, @NotNull String description, @NotNull Point point,
-                    @NotNull Short beds, @NotNull Short baths, @NotNull Integer squareMeters, @NotNull Iterable<Province> provinces) {
+        @NotNull Short beds, @NotNull Short baths, @NotNull Integer squareMeters, @NotNull Iterable<Province> provinces) {
         this.id = id;
         this.title = title;
         this.price = price;

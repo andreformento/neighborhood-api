@@ -5,16 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formento.neighborhood.importation.ProvinceLoader;
 import com.formento.neighborhood.model.Boundary;
 import com.formento.neighborhood.model.Province;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProvinceLoaderFile implements ProvinceLoader {
@@ -34,10 +33,10 @@ public class ProvinceLoaderFile implements ProvinceLoader {
         });
 
         return boundaryMap.
-                entrySet().
-                stream().
-                map(entry -> new Province(entry.getKey(), entry.getValue())).
-                collect(Collectors.toList());
+            entrySet().
+            stream().
+            map(entry -> new Province(entry.getKey(), entry.getValue())).
+            collect(Collectors.toList());
     }
 
 }

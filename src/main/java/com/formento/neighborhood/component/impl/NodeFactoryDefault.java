@@ -1,15 +1,16 @@
 package com.formento.neighborhood.component.impl;
 
 import com.formento.neighborhood.component.NodeFactory;
-import com.formento.neighborhood.model.*;
-import com.formento.neighborhood.validation.NeighborhoodDuplicationException;
-import com.formento.neighborhood.validation.DuplicatedPointValidator;
+import com.formento.neighborhood.infra.NeighborhoodException;
+import com.formento.neighborhood.model.Node;
+import com.formento.neighborhood.model.Property;
+import com.formento.neighborhood.model.PropertyComparator;
+import com.formento.neighborhood.model.PropertyComparatorX;
 import com.google.common.collect.ImmutableList;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Component;
 
 @Component
 public class NodeFactoryDefault implements NodeFactory {
@@ -17,7 +18,7 @@ public class NodeFactoryDefault implements NodeFactory {
     @Override
     public Node createRoot(final Collection<Property> properties) {
         if (properties.isEmpty()) {
-            throw new NeighborhoodDuplicationException("List of points cannot be empty");
+            throw new NeighborhoodException("List of properties cannot be empty");
         }
 
         return createRoot(properties, PropertyComparatorX.getInstance());
@@ -32,10 +33,6 @@ public class NodeFactoryDefault implements NodeFactory {
         final Optional<Node> right = getRightNode(sortedProperties, nextPropertyComparator, middle);
 
         final Property value = sortedProperties.get(middle);
-
-        final DuplicatedPointValidator duplicatedPropertyValidator = new DuplicatedPointValidator(value.getPoint());
-        left.map(Node::getValue).ifPresent(duplicatedPropertyValidator::validate);
-        right.map(Node::getValue).ifPresent(duplicatedPropertyValidator::validate);
 
         return new Node(value, left, right, propertyComparator);
     }
