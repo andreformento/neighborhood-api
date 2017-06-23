@@ -15,7 +15,7 @@ Run: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
 
 ### APIs
 
-##### Insert a property
+#### Insert a property
 
 Request `POST`
 ```
@@ -39,7 +39,7 @@ curl -X POST 'http://localhost:8080/properties' \
 '
 ```
 
-##### Find a property by id
+#### Find a property by id
 Request `GET`
 ```
 /properties/{id}
@@ -49,7 +49,7 @@ Example:
 curl -X GET 'http://localhost:8080/properties/665'
 ```
 
-##### Find a property by area
+#### Find a property by area
 Request `GET`
 ```
 curl -X GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
@@ -59,7 +59,7 @@ Example:
 curl -X GET 'http://localhost:8080/properties?ax=70&ay=95&bx=70&by=0'
 ```
 
-#### References to resolve problem
+### References to resolve problem
 
 - [3. Kd Trees](https://www.youtube.com/watch?v=W94M9D_yXKk)
 - [K Dimensional Tree | Set 1 (Search and Insert)](http://www.geeksforgeeks.org/k-dimensional-tree)
