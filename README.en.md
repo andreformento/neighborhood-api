@@ -1,35 +1,27 @@
 [![Build Status](https://travis-ci.org/andreformento/neighborhood-api.svg?branch=master)](https://travis-ci.org/andreformento/neighborhood-api)
 
 # neighborhood-api
-Esta aplicação é uma API construída para para organizar propriedades. É possível cadastrar um nova propriedade, buscar por ID e por uma determinada área. As propriedades sempre estão vínculadas aos Spotipos, podendo inclusive pertencer a mais de um.
+An API to organize neighborhood
 
-Foi utilizado o algoritmo "kdtree dimensional" para otimizar a busca.
-
-### Tecnologias
-
-- Java 8
-- Gradle
-- Docker (opcional)
-
-### Como fazer
-Teste: `$ gradle integrationTest -i`
+### How to
+Test: `$ gradle integrationTest -i`
 
 Build: `$ gradle build`
 
-#### Rodando com Docker
-Criar imagem: `$ gradle buildDocker`
+#### Run on Docker
+Create image: `$ gradle buildDocker`
 
-Rodar: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
+Run: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
 
 ### APIs
 
-#### Criar imóveis em Spotippos :)
+#### Insert a property
 
 Request `POST`
 ```
 /properties
 ```
-Exemplo:
+Example:
 ```
 curl -X POST 'http://localhost:8080/properties' \
 -H 'Content-Type: application/json' \
@@ -47,27 +39,27 @@ curl -X POST 'http://localhost:8080/properties' \
 '
 ```
 
-#### Mostrar um imóvel específico em Spotippos =]
+#### Find a property by id
 Request `GET`
 ```
 /properties/{id}
 ```
-Exemplo:
+Example:
 ```
 curl -X GET 'http://localhost:8080/properties/665'
 ```
 
-#### Buscar imóveis em Spotippos :D
+#### Find a property by area
 Request `GET`
 ```
 curl -X GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
 ```
-Exemplo:
+Example:
 ```
 curl -X GET 'http://localhost:8080/properties?ax=70&ay=95&bx=70&by=0'
 ```
 
-### Referências para resolver o algoritmo
+### References to resolve problem
 
 - [3. Kd Trees](https://www.youtube.com/watch?v=W94M9D_yXKk)
 - [K Dimensional Tree | Set 1 (Search and Insert)](http://www.geeksforgeeks.org/k-dimensional-tree)
