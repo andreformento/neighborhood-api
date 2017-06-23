@@ -35,7 +35,6 @@ public class DatabaseInitializerIT {
     @Test
     public void shouldInitializeProvincesAfterStartApplication() {
         assertThat(provinceRepository.count()).isEqualTo(6L);
-        final Collection<Province> provinces = provinceRepository.findAll();
     }
     @Test
     public void shouldInitializeProvincesNotNull() {
@@ -53,11 +52,5 @@ public class DatabaseInitializerIT {
         assertThat(provinces.stream().map(Province::getBoundary).map(Boundary::getUpperLeft).map(Point::getX).collect(toList())).asList().doesNotContainNull();
         assertThat(provinces.stream().map(Province::getBoundary).map(Boundary::getUpperLeft).map(Point::getY).collect(toList())).asList().doesNotContainNull();
     }
-
-//    @Test
-//    public void shouldInitializeProvincesAfterStartApplication() {
-//        assertThat(propertyService.).isEqualTo(8L);
-//    find each region
-//    }
 
 }
