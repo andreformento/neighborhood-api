@@ -11,7 +11,7 @@ Build: `$ gradle build`
 #### Run on Docker
 Create image: `$ gradle buildDocker`
 
-Run: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
+Run: `$ docker run -d -p 8080:8080 andreformento/neighborhood-api`
 
 ### APIs
 
@@ -23,7 +23,7 @@ Request `POST`
 ```
 Example:
 ```
-curl -X POST 'http://localhost:8080/properties' \
+curl -X POST 'https://neighborhood-api-formento.herokuapp.com/properties' \
 -H 'Content-Type: application/json' \
 -d '
 {
@@ -46,7 +46,7 @@ Request `GET`
 ```
 Example:
 ```
-curl -X GET 'http://localhost:8080/properties/665'
+curl -X GET 'https://neighborhood-api-formento.herokuapp.com/properties/665'
 ```
 
 #### Find a property by area
@@ -56,7 +56,7 @@ curl -X GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
 ```
 Example:
 ```
-curl -X GET 'http://localhost:8080/properties?ax=70&ay=95&bx=70&by=0'
+curl -X GET 'https://neighborhood-api-formento.herokuapp.com/properties?ax=70&ay=95&bx=70&by=0'
 ```
 
 ### References to resolve problem
