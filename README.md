@@ -11,6 +11,10 @@ Foi utilizado o algoritmo "kdtree dimensional" para otimizar a busca.
 - Gradle
 - Docker (opcional)
 
+### Devops
+
+Quando um push é feito na branch `master` no Travis roda o build e se houver sucesso é feito o deploy no [Heroku](https://neighborhood-api-formento.herokuapp.com/).
+
 ### Como fazer
 Teste: `$ gradle integrationTest -i`
 
