@@ -3,12 +3,12 @@
 # neighborhood-api
 An API to organize neighborhood
 
-#### How to
+### How to
 Test: `$ gradle integrationTest -i`
 
 Build: `$ gradle build`
 
-### Run on Docker
+#### Run on Docker
 Create image: `$ gradle buildDocker`
 
 Run: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
