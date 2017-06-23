@@ -25,9 +25,8 @@ Rodar: `$ docker run -d -p 8080:8080 formento/neighborhood-api`
 
 #### Criar imóveis em Spotippos :)
 
-Request `POST`
 ```
-/properties
+POST /properties
 ```
 Exemplo:
 ```
@@ -48,9 +47,8 @@ curl -X POST 'http://localhost:8080/properties' \
 ```
 
 #### Mostrar um imóvel específico em Spotippos =]
-Request `GET`
 ```
-/properties/{id}
+GET /properties/{id}
 ```
 Exemplo:
 ```
@@ -58,9 +56,8 @@ curl -X GET 'http://localhost:8080/properties/665'
 ```
 
 #### Buscar imóveis em Spotippos :D
-Request `GET`
 ```
-curl -X GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
+GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
 ```
 Exemplo:
 ```
