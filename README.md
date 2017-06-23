@@ -64,7 +64,7 @@ Exemplo:
 curl -X GET 'http://localhost:8080/properties?ax=70&ay=95&bx=70&by=0'
 ```
 
-### Referências para resolver o algoritmo
+### Referências
 
 - [3. Kd Trees](https://www.youtube.com/watch?v=W94M9D_yXKk)
 - [K Dimensional Tree | Set 1 (Search and Insert)](http://www.geeksforgeeks.org/k-dimensional-tree)
