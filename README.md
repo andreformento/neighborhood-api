@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/andreformento/neighborhood-api.svg?branch=master)](https://travis-ci.org/andreformento/neighborhood-api)
 
 # neighborhood-api
-Esta aplicação é uma API construída para para organizar propriedades. É possível cadastrar um nova propriedade, buscar por ID e por uma determinada área. As propriedades sempre estão vínculadas aos Spotipos, podendo inclusive pertencer a mais de um.
+Esta aplicação é uma API construída para para organizar propriedades. É possível cadastrar um nova propriedade, buscar por ID e por uma determinada área. As propriedades sempre estão vínculadas aos Spotippos, podendo inclusive pertencer a mais de um.
 
 Foi utilizado o algoritmo "kdtree dimensional" para otimizar a busca.
 
