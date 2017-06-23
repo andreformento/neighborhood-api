@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM openjdk:8-jre-alpine
 MAINTAINER Andre Formento <andreformento.sc@gmail.com>
 
 VOLUME /tmp
