@@ -118,5 +118,6 @@ integrationTest.mustRunAfter test
 jacocoTestReport.mustRunAfter integrationTest
 
 integrationTest.dependsOn test
+codeCoverageReport.dependsOn integrationTest
 check.dependsOn integrationTest
 check.dependsOn jacocoTestReport
