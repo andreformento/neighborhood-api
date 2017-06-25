@@ -12,6 +12,6 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f src/main/docker/Dockerfile -t $DOCKER_REPO:$COMMIT .
-  - docker tag $DOCKER_REPO:$COMMIT $DOCKER_REPO:$TAG
-  - docker push $DOCKER_REPO
+  - docker build -f src/main/docker/Dockerfile -t andreformento/neighborhood-api:$COMMIT .
+  - docker tag andreformento/neighborhood-api:$COMMIT andreformento/neighborhood-api:$TAG
+  - docker push andreformento/neighborhood-api
