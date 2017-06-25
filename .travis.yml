@@ -2,8 +2,17 @@ language: java
 jdk:
   - oraclejdk8
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
 notifications:
   email: false
+
+services:
+  - docker
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=andreformento/neighborhood-api
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f src/main/docker/Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker push $REPO
