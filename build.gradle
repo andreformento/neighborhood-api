@@ -99,7 +99,9 @@ task jacocoIntegrationTestReport(type: JacocoReport){
     executionData integrationTest
 }
 
-integrationTest.dependsOn test
 integrationTest.mustRunAfter test
+jacocoTestReport.mustRunAfter integrationTest
+
+integrationTest.dependsOn test
 check.dependsOn integrationTest
 check.dependsOn jacocoTestReport
