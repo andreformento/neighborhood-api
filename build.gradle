@@ -90,10 +90,6 @@ task integrationTest(type: Test, dependsOn: cleanTest) {
     outputs.upToDateWhen { false }
 }
 
-check.dependsOn jacocoTestReport
-
-integrationTest.mustRunAfter test
-
 tasks.withType(Test) {
     reports.html.destination = file("${reporting.baseDir}/${name}")
 }
@@ -103,5 +99,7 @@ task jacocoIntegrationTestReport(type: JacocoReport){
     executionData integrationTest
 }
 
-check.dependsOn integrationTest
 integrationTest.dependsOn test
+integrationTest.mustRunAfter test
+check.dependsOn integrationTest
+check.dependsOn jacocoTestReport
