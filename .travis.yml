@@ -15,3 +15,5 @@ after_success:
   - docker build -f src/main/docker/Dockerfile -t andreformento/neighborhood-api:$COMMIT .
   - docker tag andreformento/neighborhood-api:$COMMIT andreformento/neighborhood-api:$TAG
   - docker push andreformento/neighborhood-api
+
+#https://sebest.github.io/post/using-travis-ci-to-build-docker-images/

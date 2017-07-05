@@ -28,7 +28,7 @@ nbdist/
 ### Gradle ###
 .gradle
 gradle/
-gradlew
+#gradlew
 gradlew.bat
 /build/
 
