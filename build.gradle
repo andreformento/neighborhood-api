@@ -21,7 +21,7 @@ apply plugin: 'docker'
 
 jar {
     baseName = 'neighborhood-api'
-    version = '3.0.0-SNAPSHOT' //${project.version}
+    version = '3.0.0' //${project.version}
 }
 
 task copyJar(type: Copy) {
