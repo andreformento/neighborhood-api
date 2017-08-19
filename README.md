@@ -2,7 +2,7 @@
 [![Code Coverage](https://codecov.io/gh/andreformento/neighborhood-api/branch/master/graph/badge.svg)](https://codecov.io/gh/andreformento/neighborhood-api)
 
 # neighborhood-api
-Esta aplicação é uma API construída para para organizar propriedades. É possível cadastrar um nova propriedade, buscar por ID e por uma determinada área. As propriedades sempre estão vínculadas aos Spotippos, podendo inclusive pertencer a mais de um.
+Esta aplicação é uma API construída para organizar propriedades. É possível cadastrar um nova propriedade, buscar por ID e por uma determinada área. As propriedades sempre estão vínculadas aos Spotippos, podendo inclusive pertencer a mais de um.
 
 Foi utilizado o algoritmo "kdtree dimensional" para otimizar a busca.
 
