@@ -12,10 +12,6 @@ Foi utilizado o algoritmo "kdtree dimensional" para otimizar a busca.
 - Gradle
 - Docker (opcional)
 
-### Devops
-
-Quando um push é feito na branch `master` no Travis roda o build e se houver sucesso é feito o deploy no [Heroku](https://neighborhood-api-formento.herokuapp.com/).
-
 ### Como fazer
 Teste: `$ gradle integrationTest -i`
 
@@ -35,7 +31,7 @@ POST /properties
 ```
 Exemplo:
 ```
-curl -X POST 'https://neighborhood-api-formento.herokuapp.com/properties' \
+curl -X POST 'http://localhost:8080/properties' \
 -H 'Content-Type: application/json' \
 -d '
 {
@@ -57,7 +53,7 @@ GET /properties/{id}
 ```
 Exemplo:
 ```
-curl -X GET 'https://neighborhood-api-formento.herokuapp.com/properties/665'
+curl -X GET 'http://localhost:8080/properties/665'
 ```
 
 #### Buscar imóveis em Spotippos :D
@@ -66,7 +62,7 @@ GET /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
 ```
 Exemplo:
 ```
-curl -X GET 'https://neighborhood-api-formento.herokuapp.com/properties?ax=70&ay=95&bx=70&by=0'
+curl -X GET 'http://localhost:8080/properties?ax=70&ay=95&bx=70&by=0'
 ```
 
 ### Referências
